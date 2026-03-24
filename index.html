@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yiwei's Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    /* =====================
+       CSS VARIABLES
+       Change these to restyle the whole site
+    ===================== */
+    :root {
+      --bg: #f9f9f7;
+      --surface: #ffffff;
+      --border: #e8e8e4;
+      --text-primary: #1a1a18;
+      --text-secondary: #6b6b65;
+      --text-muted: #a0a09a;
+      --accent: #2d6a4f;
+      --accent-light: #e8f4ef;
+      --sidebar-width: 220px;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --transition: 0.18s ease;
+      --radius: 10px;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] {
+      --bg: #111110;
+      --surface: #1c1c1a;
+      --border: #2a2a27;
+      --text-primary: #f0f0ea;
+      --text-secondary: #888882;
+      --text-muted: #555550;
+      --accent: #52b788;
+      --accent-light: #1a2e24;
+    }
+
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 15px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =====================
+       SIDEBAR
+    ===================== */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-height: 100vh;
+      border-right: 1px solid var(--border);
+      padding: 28px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: fixed;
+      top: 0; left: 0;
+      background: var(--bg);
+      z-index: 100;
+      transition: background var(--transition);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      padding: 0 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 8px;
+      margin-bottom: 4px;
+      margin-top: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 8px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      gap: 8px;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon {
+      width: 16px;
+      height: 16px;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .nav-num {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Theme toggle at bottom of sidebar */
+    .sidebar-bottom {
+      margin-top: auto;
+      display: flex;
+      gap: 6px;
+      padding: 0 8px;
+    }
+
+    .theme-btn {
+      flex: 1;
+      padding: 6px 0;
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .theme-btn:hover, .theme-btn.active {
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    /* =====================
+       MAIN CONTENT
+    ===================== */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 64px 72px;
+      max-width: 860px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================
+       GREETING
+    ===================== */
+    .greeting {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .greeting-sub {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    /* =====================
+       HINT CARDS GRID
+    ===================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+
+    .hint-card {
+      background: var(--surface);
+      padding: 20px 22px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      transition: background var(--transition);
+    }
+
+    .hint-card:hover {
+      background: var(--accent-light);
+    }
+
+    .hint-card a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* =====================
+       UPDATES SECTION
+    ===================== */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .view-all {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .view-all:hover { color: var(--accent); }
+
+    .updates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .update-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: border-color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+
+    .update-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .update-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .update-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .update-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .update-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* =====================
+       PROJECTS SECTION
+    ===================== */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .project-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+
+    .project-row:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .project-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .project-info { flex: 1; }
+
+    .project-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      background: var(--border);
+      border-radius: 20px;
+      color: var(--text-secondary);
+    }
+
+    /* =====================
+       PAGES (show/hide)
+    ===================== */
+    .page { display: none; animation: fadeUp 0.35s ease both; }
+    .page.active { display: block; }
+
+    /* =====================
+       ABOUT PAGE
+    ===================== */
+    .about-content {
+      max-width: 560px;
+    }
+
+    .about-content h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .about-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* =====================
+       MOBILE
+    ===================== */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 16px;
+        gap: 12px;
+      }
+      .main {
+        margin-left: 0;
+        padding: 32px 20px;
+      }
+      .updates-grid { grid-template-columns: 1fr 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+      body { flex-direction: column; }
+      .nav-section { flex-direction: row; flex-wrap: wrap; }
+      .nav-label { display: none; }
+      .sidebar-bottom { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================
+       SIDEBAR
+  ===================== -->
+  <aside class="sidebar">
+    <!-- 🔧 CHANGE THIS: your name -->
+    <div class="logo">Yiwei Han</div>
+
+    <nav class="nav-section">
+      <div class="nav-item active" onclick="showPage('home', this)">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l6-4 6 4v8H2z"/></svg>
+          Home
+        </div>
+        <span class="nav-num">1</span>
+      </div>
+      <div class="nav-item" onclick="showPage('about', this)">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+          About
+        </div>
+        <span class="nav-num">2</span>
+      </div>
+      <div class="nav-item" onclick="showPage('projects', this)">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
+          Projects
+        </div>
+        <span class="nav-num">3</span>
+      </div>
+      <div class="nav-item" onclick="showPage('writing', this)">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>
+          Writing
+        </div>
+        <span class="nav-num">4</span>
+      </div>
+    </nav>
+
+    <nav class="nav-section">
+      <div class="nav-label">Stay in touch</div>
+      <div class="nav-item">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 5l6 4 6-4"/></svg>
+          Contact
+        </div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-item-left">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 3L8 8M3 7l3 1 1 3 6-5"/></svg>
+          Twitter / X
+        </div>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.4"><path d="M2 8L8 2M4 2h4v4"/></svg>
+      </div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="theme-btn active" onclick="setTheme('light', this)">Light</button>
+      <button class="theme-btn" onclick="setTheme('dark', this)">Dark</button>
+    </div>
+  </aside>
+
+  <!-- =====================
+       MAIN
+  ===================== -->
+  <main class="main">
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+
+      <!-- 🔧 CHANGE: greeting is auto time-based, but tweak the sub text -->
+      <h1 class="greeting" id="greeting">Good morning</h1>
+      <p class="greeting-sub">
+        My name is Yiwei Han — Welcome to my site. I'm a product designer / developer / creative based in Manchester, UK.
+      </p>
+
+      <div class="cards-grid">
+        <div class="hint-card">Use keyboard shortcuts 1–4 to navigate between pages.</div>
+        <div class="hint-card">Don't know me yet? I'm Yiwei, I love playing guitar. <a href="#">More about me →</a></div>
+        <div class="hint-card">I enjoy meeting people and helping where I can. <a href="#">Open calendar ↗</a></div>
+        <div class="hint-card">If you're curious how this site was built, I have notes on it. <a href="#">Check it out →</a></div>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title">Updates</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+
+      <!-- 🔧 CHANGE: swap in your own updates -->
+      <div class="updates-grid">
+        <div class="update-card">
+          <div class="update-icon">🚀</div>
+          <div class="update-title">Launched this website</div>
+          <div class="update-desc">Built with plain HTML & CSS. First step on the journey.</div>
+          <div class="update-date">Mar 2026</div>
+        </div>
+        <div class="update-card">
+          <div class="update-icon">✏️</div>
+          <div class="update-title">Started writing online</div>
+          <div class="update-desc">Sharing notes on design, code, and things I'm learning.</div>
+          <div class="update-date">Mar 2026</div>
+        </div>
+        <div class="update-card">
+          <div class="update-icon">🎓</div>
+          <div class="update-title">Learning design engineering</div>
+          <div class="update-desc">Bridging the gap between design and code.</div>
+          <div class="update-date">Jan 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div class="page" id="page-about">
+      <div class="about-content">
+        <h2>About me</h2>
+        <!-- 🔧 CHANGE: write your own bio -->
+        <p>Hi, I'm Yiwei Han. I'm a product designer based in Manchester, currently working @AeroCloud.</p>
+        <p>I care about [values]. Before this, I [past experience]. I'm now focused on [current focus].</p>
+        <p>Outside of work, I [hobbies / interests].</p>
+      </div>
+    </div>
+
+    <!-- PROJECTS PAGE -->
+    <div class="page" id="page-projects">
+      <h2 class="section-title" style="margin-bottom: 8px;">Projects</h2>
+      <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 32px;">
+        A selection of things I've built or worked on.
+      </p>
+
+      <!-- 🔧 CHANGE: add your own projects -->
+      <div class="projects-list">
+        <div class="project-row">
+          <div class="project-thumb">🌐</div>
+          <div class="project-info">
+            <div class="project-name">This Website</div>
+            <div class="project-desc">Personal site built from scratch with HTML, CSS & JS</div>
+          </div>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+        <div class="project-row">
+          <div class="project-thumb">📐</div>
+          <div class="project-info">
+            <div class="project-name">Project Two</div>
+            <div class="project-desc">A short description of what this project does</div>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Design</span>
+          </div>
+        </div>
+        <div class="project-row">
+          <div class="project-thumb">💡</div>
+          <div class="project-info">
+            <div class="project-name">Project Three</div>
+            <div class="project-desc">A short description of what this project does</div>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRITING PAGE -->
+    <div class="page" id="page-writing">
+      <h2 class="section-title" style="margin-bottom: 8px;">Writing</h2>
+      <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 32px;">
+        Notes, essays, and things I've learned.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.875rem;">Nothing here yet — coming soon.</p>
+    </div>
+
+  </main>
+
+  <!-- =====================
+       JAVASCRIPT
+  ===================== -->
+  <script>
+    // --- TIME-BASED GREETING ---
+    function setGreeting() {
+      const hour = new Date().getHours();
+      const el = document.getElementById('greeting');
+      if (hour < 12)      el.textContent = 'Good morning.';
+      else if (hour < 17) el.textContent = 'Good afternoon.';
+      else                el.textContent = 'Good evening.';
+    }
+    setGreeting();
+
+    // --- PAGE NAVIGATION ---
+    function showPage(name, navEl) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Remove active from nav items
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      // Show selected
+      document.getElementById('page-' + name).classList.add('active');
+      if (navEl) navEl.classList.add('active');
+    }
+
+    // Keyboard shortcuts 1-4
+    document.addEventListener('keydown', (e) => {
+      const pages = ['home', 'about', 'projects', 'writing'];
+      const idx = parseInt(e.key) - 1;
+      if (idx >= 0 && idx < pages.length) {
+        const navItems = document.querySelectorAll('.nav-item');
+        showPage(pages[idx], navItems[idx]);
+      }
+    });
+
+    // --- DARK / LIGHT MODE ---
+    function setTheme(theme, btn) {
+      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+      document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      localStorage.setItem('theme', theme);
+    }
+
+    // Load saved theme
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.querySelectorAll('.theme-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === 1);
+      });
+    }
+  </script>
+
+</body>
+</html>
