@@ -2,58 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Yiwei's Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Yiwei Han, product designer. A lightweight 2026 portfolio with interactive UI/UX demos." />
+  <title>Yiwei Han - Portfolio 2026</title>
   <style>
-    /* =====================
-       CSS VARIABLES
-       Change these to restyle the whole site
-    ===================== */
     :root {
-      --bg: #f9f9f7;
-      --surface: #ffffff;
-      --border: #e8e8e4;
-      --text-primary: #1a1a18;
-      --text-secondary: #6b6b65;
-      --text-muted: #a0a09a;
-      --accent: #2d6a4f;
-      --accent-light: #e8f4ef;
-      --sidebar-width: 220px;
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body: 'DM Sans', sans-serif;
-      --transition: 0.18s ease;
-      --radius: 10px;
+      --font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      --font-display: Inter, var(--font-fallback);
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 40px;
+      --space-8: 48px;
+
+      --radius-0: 4px;
+      --radius-1: 8px;
+      --radius-2: 12px;
+
+      --background: #f8f9fb;
+      --foreground: #ffffff;
+      --panel: #f1f3f7;
+      --panel-strong: #e8ebf2;
+      --text-primary: #17191f;
+      --text-secondary: #4e5668;
+      --text-tertiary: #6c758b;
+      --border-color: #dfe3ec;
+      --accent: #4d63ff;
+      --accent-soft: #eef1ff;
+      --brand-color: #1ed760;
+      --brand-soft: #e8f8ef;
+      --success: #147d63;
+      --success-soft: #e8f6f1;
+      --danger: #b3364b;
+      --danger-soft: #fff0f3;
+      --shadow-color: 223deg 8% 78%;
+      --shadow-1: 0.5px 1px 1px hsl(var(--shadow-color) / 0.25);
+      --shadow-2:
+        1px 2px 2px hsl(var(--shadow-color) / 0.18),
+        2px 4px 8px hsl(var(--shadow-color) / 0.14),
+        8px 16px 36px hsl(var(--shadow-color) / 0.1);
+
+      color-scheme: light;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Dark mode */
     [data-theme="dark"] {
-      --bg: #111110;
-      --surface: #1c1c1a;
-      --border: #2a2a27;
-      --text-primary: #f0f0ea;
-      --text-secondary: #888882;
-      --text-muted: #555550;
-      --accent: #52b788;
-      --accent-light: #1a2e24;
+      --background: #0d1321;
+      --foreground: #141c2c;
+      --panel: #1b263b;
+      --panel-strong: #24324d;
+      --text-primary: #f4f5f8;
+      --text-secondary: #c2c7d2;
+      --text-tertiary: #92a0ba;
+      --border-color: #2d3b59;
+      --accent: #8fb3ff;
+      --accent-soft: rgba(143, 179, 255, 0.14);
+      --brand-soft: rgba(30, 215, 96, 0.14);
+      --success: #67d6af;
+      --success-soft: rgba(103, 214, 175, 0.14);
+      --danger: #ff8ea2;
+      --danger-soft: rgba(255, 142, 162, 0.14);
+      --shadow-color: 230deg 20% 4%;
+
+      color-scheme: dark;
     }
 
-    /* =====================
-       RESET & BASE
-    ===================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { font-size: 15px; scroll-behavior: smooth; }
+    html {
+      min-height: 100%;
+      background: var(--background);
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text-primary);
-      display: flex;
       min-height: 100vh;
-      transition: background var(--transition), color var(--transition);
+      margin: 0;
+      font-family: var(--font-display);
+      color: var(--text-primary);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--foreground) 72%, transparent), transparent 300px),
+        var(--background);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
     }
 
     a {
@@ -61,605 +108,2148 @@
       text-decoration: none;
     }
 
-    /* =====================
-       SIDEBAR
-    ===================== */
-    .sidebar {
-      width: var(--sidebar-width);
-      min-height: 100vh;
-      border-right: 1px solid var(--border);
-      padding: 28px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
+    .theme-toggle {
       position: fixed;
-      top: 0; left: 0;
-      background: var(--bg);
-      z-index: 100;
-      transition: background var(--transition);
+      z-index: 20;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      background: color-mix(in srgb, var(--foreground) 92%, transparent);
+      box-shadow: var(--shadow-1);
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
     }
 
-    .logo {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible {
       color: var(--text-primary);
-      padding: 0 8px;
-      letter-spacing: -0.01em;
+      border-color: var(--brand-color);
+      outline: none;
     }
 
-    .nav-section {
+    .theme-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .site-shell {
+      width: min(100%, 1240px);
+      margin: 0 auto;
+      padding: var(--space-6);
+      display: grid;
+      grid-template-columns: minmax(500px, 500px) minmax(0, 1fr);
+      gap: var(--space-5);
+      align-items: start;
+    }
+
+    .intro-panel {
+      min-width: 0;
+      padding: var(--space-4) var(--space-3) var(--space-3);
+      display: grid;
+      gap: var(--space-6);
+      position: sticky;
+      top: var(--space-5);
+    }
+
+    .intro-copy {
+      margin: 0;
+      max-width: 31rem;
+      display: grid;
+      gap: var(--space-2);
+      font-size: 27px;
+      line-height: 1.12;
+      font-weight: 680;
+    }
+
+    .intro-line {
+      display: block;
+    }
+
+    .intro-line:first-child {
+      color: var(--text-tertiary);
+      font-size: 0.82em;
+      font-weight: 520;
+    }
+
+    .worked-line {
+      white-space: nowrap;
+    }
+
+    .company-picker {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .active-company {
+      appearance: none;
+      border: 1px solid color-mix(in srgb, var(--brand-color) 36%, transparent);
+      padding: 0 8px 2px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.28em;
+      color: var(--brand-color);
+      background: color-mix(in srgb, var(--brand-color) 7%, transparent);
+      border-radius: var(--radius-1);
+      cursor: ns-resize;
+      font: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      white-space: nowrap;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .active-company:hover {
+      border-color: color-mix(in srgb, var(--brand-color) 58%, transparent);
+      background: color-mix(in srgb, var(--brand-color) 12%, transparent);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--brand-color) 12%, transparent);
+      transform: translateY(-1px);
+    }
+
+    .active-company:hover,
+    .active-company:focus-visible {
+      outline: none;
+    }
+
+    .active-company svg {
+      width: 0.72em;
+      height: 0.72em;
+      transform: translateY(0.04em);
+    }
+
+    .caption {
+      max-width: 31rem;
+      margin: var(--space-5) 0 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .company-popover {
+      position: absolute;
+      z-index: 30;
+      top: calc(100% + 12px);
+      right: 0;
+      width: min(300px, 84vw);
+      height: 220px;
+      padding: var(--space-3) var(--space-2);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-2);
+      display: none;
+      align-content: center;
+      gap: var(--space-2);
+      overflow: hidden;
+      background: color-mix(in srgb, var(--foreground) 96%, transparent);
+      box-shadow: var(--shadow-2);
+      backdrop-filter: blur(18px);
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+    }
+
+    .company-popover[data-open="true"] {
+      display: grid;
+    }
+
+    .company-option {
+      width: 100%;
+      min-height: 58px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-1);
+      padding: var(--space-3);
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) 18px;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--text-secondary);
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      opacity: 0.24;
+      transform: scale(0.94);
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .company-option:hover,
+    .company-option:focus-visible {
+      color: var(--text-primary);
+      border-color: color-mix(in srgb, var(--brand-color) 24%, var(--border-color));
+      opacity: 0.7;
+      outline: none;
+    }
+
+    .company-option[aria-selected="true"] {
+      min-height: 72px;
+      color: var(--text-primary);
+      background: var(--foreground);
+      border-color: color-mix(in srgb, var(--brand-color) 42%, var(--border-color));
+      box-shadow: var(--shadow-1);
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .company-option[data-wheel-position="prev"],
+    .company-option[data-wheel-position="next"] {
+      pointer-events: auto;
+    }
+
+    .company-option[aria-selected="true"] .option-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mark-color);
+      border: 1px solid color-mix(in srgb, var(--mark-color) 22%, transparent);
+      background: color-mix(in srgb, var(--mark-color) 12%, var(--foreground));
+    }
+
+    .brand-mark svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .brand-spotify {
+      --mark-color: #1ed760;
+    }
+
+    .brand-notion {
+      --mark-color: #111111;
+    }
+
+    [data-theme="dark"] .brand-notion {
+      --mark-color: #ffffff;
+    }
+
+    .brand-instagram {
+      --mark-color: #e1306c;
+    }
+
+    .option-copy {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .option-name {
+      color: currentColor;
+      font-size: 15px;
+      font-weight: 680;
+    }
+
+    .option-line {
+      overflow: hidden;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .option-arrow {
+      opacity: 0;
+      color: var(--brand-color);
+      font-size: 13px;
+      line-height: 1;
+      transform: translateX(-4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .panel-footer {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+
+    .panel-footer a {
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .panel-footer a:hover,
+    .panel-footer a:focus-visible {
+      color: var(--text-primary);
+      border-color: var(--text-primary);
+      outline: none;
+    }
+
+    .demo-panel {
+      min-width: 0;
+      padding: 0;
+    }
+
+    .demo-wrap {
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-2);
+      background: color-mix(in srgb, var(--foreground) 94%, transparent);
+      box-shadow: var(--shadow-2);
+    }
+
+    .demo-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: end;
+    }
+
+    .demo-eyebrow {
+      margin: 0 0 var(--space-2);
+      color: var(--text-tertiary);
+      font-size: 12px;
+      font-weight: 680;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .demo-title {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.2;
+      font-weight: 680;
+    }
+
+    .demo-note {
+      max-width: 34rem;
+      margin: var(--space-2) 0 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .demo-count {
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .demo-stage {
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-1);
+      background: var(--foreground);
+    }
+
+    .demo-frame {
+      min-height: 520px;
+      display: grid;
+    }
+
+    .segmented {
+      display: inline-flex;
+      padding: 3px;
+      gap: 3px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-1);
+      background: var(--panel);
+    }
+
+    .segment {
+      min-height: 30px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 var(--space-3);
+      color: var(--text-tertiary);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 620;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .segment:hover,
+    .segment:focus-visible {
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .segment[aria-pressed="true"] {
+      color: var(--text-primary);
+      background: var(--foreground);
+      box-shadow: var(--shadow-1);
+    }
+
+    .toggle {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 620;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle input {
+      width: 34px;
+      height: 20px;
+      margin: 0;
+      appearance: none;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--panel);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .toggle input::before {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      background: var(--foreground);
+      box-shadow: var(--shadow-1);
+      transition: transform 0.2s ease;
+    }
+
+    .toggle input:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .toggle input:checked::before {
+      transform: translateX(14px);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border-radius: var(--radius-1);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 620;
+      white-space: nowrap;
+    }
+
+    .spotify-demo {
+      grid-template-columns: 176px minmax(0, 1fr);
+      color: #f6f8f4;
+      background: #0b0f0d;
+    }
+
+    .spotify-sidebar {
+      padding: var(--space-4);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      align-content: start;
+      gap: var(--space-4);
+      background: #080a09;
+    }
+
+    .spotify-logo,
+    .product-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-weight: 720;
+    }
+
+    .spotify-logo svg {
+      color: #1ed760;
+    }
+
+    .spotify-nav {
+      display: grid;
+      gap: var(--space-2);
+      color: rgba(246, 248, 244, 0.58);
+      font-size: 13px;
+    }
+
+    .spotify-nav span {
+      min-height: 30px;
+      padding: 0 var(--space-2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .spotify-nav span:nth-child(2) {
+      color: #f6f8f4;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .spotify-main {
+      min-width: 0;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      background: #101411;
+    }
+
+    .spotify-hero {
+      padding: var(--space-5);
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: var(--space-4);
+      align-items: end;
+      background:
+        linear-gradient(135deg, rgba(93, 58, 184, 0.94), rgba(16, 20, 17, 0.72)),
+        #291a5b;
+    }
+
+    .spotify-cover {
+      aspect-ratio: 1;
+      border-radius: var(--radius-1);
+      display: grid;
+      place-items: center;
+      color: white;
+      background:
+        radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.7), transparent 16%),
+        linear-gradient(135deg, #4b22ff, #b8f4d2);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+    }
+
+    .spotify-cover svg {
+      width: 52px;
+      height: 52px;
+    }
+
+    .spotify-title {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.05;
+      font-weight: 780;
+    }
+
+    .spotify-copy {
+      margin: var(--space-2) 0 0;
+      max-width: 34rem;
+      color: rgba(246, 248, 244, 0.7);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .spotify-actions {
+      padding: var(--space-3) var(--space-5);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: linear-gradient(180deg, rgba(48, 36, 79, 0.34), transparent);
+    }
+
+    .spotify-play {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0f0d;
+      background: #1ed760;
+      cursor: pointer;
+      font-weight: 780;
+    }
+
+    .selection-status {
+      min-height: 30px;
+      padding: 0 var(--space-3);
+      border: 1px solid rgba(30, 215, 96, 0.3);
+      border-radius: var(--radius-1);
+      display: inline-flex;
+      align-items: center;
+      color: #b9ffd2;
+      background: rgba(30, 215, 96, 0.1);
+      font-size: 13px;
+      font-weight: 620;
+    }
+
+    .spotify-table {
+      min-width: 0;
+      padding: var(--space-3) var(--space-5) var(--space-5);
+      display: grid;
+      align-content: start;
+      gap: 2px;
+      overflow-x: auto;
+    }
+
+    .song-head,
+    .song-row {
+      min-width: 620px;
+      display: grid;
+      grid-template-columns: 34px minmax(220px, 1.55fr) minmax(130px, 0.8fr) 104px 54px;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .song-head {
+      min-height: 34px;
+      padding: 0 var(--space-2);
+      color: rgba(246, 248, 244, 0.46);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      font-weight: 620;
+      text-transform: uppercase;
+    }
+
+    .song-row {
+      min-height: 58px;
+      padding: var(--space-2);
+      border: 1px solid transparent;
+      border-radius: var(--radius-1);
+      color: rgba(246, 248, 244, 0.84);
+      cursor: default;
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
+
+    .song-row:hover,
+    .song-row:focus-visible {
+      background: rgba(255, 255, 255, 0.06);
+      outline: none;
+    }
+
+    .song-row[data-selected="true"] {
+      border-color: rgba(30, 215, 96, 0.28);
+      background: rgba(30, 215, 96, 0.12);
+    }
+
+    .song-checkbox {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .song-checkbox input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .song-checkbox span {
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(246, 248, 244, 0.36);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0f0d;
+      background: transparent;
+      font-size: 11px;
+      font-weight: 780;
+    }
+
+    .song-checkbox input:checked + span {
+      border-color: #1ed760;
+      background: #1ed760;
+    }
+
+    .song-checkbox input:checked + span::after {
+      content: "v";
+      transform: translateY(-1px);
+    }
+
+    .song-title-cell {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .song-art {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, var(--art-a), var(--art-b)),
+        #222;
+    }
+
+    .song-title,
+    .song-meta,
+    .song-album,
+    .song-added,
+    .song-time {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .song-title {
+      display: block;
+      color: #f6f8f4;
+      font-size: 14px;
+      font-weight: 680;
+    }
+
+    .song-meta,
+    .song-album,
+    .song-added,
+    .song-time {
+      color: rgba(246, 248, 244, 0.55);
+      font-size: 12px;
+    }
+
+    .spotify-context-menu {
+      position: fixed;
+      z-index: 40;
+      width: 236px;
+      padding: var(--space-2);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-1);
+      display: grid;
+      gap: 2px;
+      color: #f6f8f4;
+      background: #1b1f1c;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.36);
+    }
+
+    .spotify-context-menu button {
+      min-height: 34px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 var(--space-2);
+      color: inherit;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .spotify-context-menu button:hover,
+    .spotify-context-menu button:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .spotify-toast {
+      margin-left: auto;
+      color: rgba(246, 248, 244, 0.72);
+      font-size: 13px;
+    }
+
+    .notion-demo {
+      position: relative;
+      padding: var(--space-5);
+      align-content: start;
+      gap: var(--space-4);
+      background: #f7f6f2;
+      color: #242424;
+    }
+
+    [data-theme="dark"] .notion-demo {
+      background: #f7f6f2;
+      color: #242424;
+    }
+
+    .notion-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .notion-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: #202020;
+      font-weight: 720;
+    }
+
+    .notion-brand svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .table-hint {
+      color: #777064;
+      font-size: 13px;
+    }
+
+    .notion-table-wrap {
+      overflow-x: auto;
+      border: 1px solid #ddd8cf;
+      border-radius: var(--radius-1);
+      background: #fffdf8;
+    }
+
+    .notion-table {
+      min-width: 660px;
+      display: grid;
+      grid-template-columns: 150px 150px 170px 190px;
+    }
+
+    .notion-cell {
+      min-height: 58px;
+      border-right: 1px solid #e5e0d7;
+      border-bottom: 1px solid #e5e0d7;
+      padding: var(--space-3);
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      color: #3a3630;
+      background: var(--cell-bg, transparent);
+      cursor: context-menu;
+      text-align: left;
+      transition: background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .notion-cell:hover,
+    .notion-cell:focus-visible {
+      box-shadow: inset 0 0 0 2px #2f7cf6;
+      outline: none;
+    }
+
+    .notion-cell[data-header="true"] {
+      min-height: 44px;
+      color: #777064;
+      background: #f0ece5;
+      font-size: 12px;
+      font-weight: 720;
+      text-transform: uppercase;
+    }
+
+    .notion-cell strong {
+      color: #242424;
+      font-size: 14px;
+    }
+
+    .notion-cell small {
+      color: #716a61;
+      font-size: 12px;
+    }
+
+    .cell-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      color: #716a61;
+      font-size: 13px;
+    }
+
+    .legend-chip {
+      min-height: 28px;
+      border: 1px solid #ddd8cf;
+      border-radius: var(--radius-1);
+      padding: 0 var(--space-2);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: #fffdf8;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--dot);
+    }
+
+    .notion-context-menu {
+      position: fixed;
+      z-index: 45;
+      width: 236px;
+      padding: var(--space-2);
+      border: 1px solid #454545;
+      border-radius: var(--radius-1);
+      display: grid;
+      gap: 2px;
+      color: #f4f4f4;
+      background: #252525;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .notion-context-menu p {
+      margin: 0;
+      padding: var(--space-2);
+      color: #b9b9b9;
+      font-size: 12px;
+      font-weight: 680;
+    }
+
+    .notion-context-menu button {
+      min-height: 34px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 var(--space-2);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: inherit;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .notion-context-menu button:hover,
+    .notion-context-menu button:focus-visible {
+      background: #3a3a3a;
+      outline: none;
+    }
+
+    .menu-swatch {
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 5px;
+      background: var(--swatch);
+    }
+
+    .instagram-demo {
+      --ig-pink: #e1306c;
+      --ig-orange: #f77737;
+      --ig-blue: #405de6;
+      --ig-ink: #251621;
+      --ig-muted: #705363;
+      align-items: start;
+      justify-items: center;
+      padding: var(--space-4);
+      border-color: rgba(225, 48, 108, 0.18);
+      background:
+        linear-gradient(135deg, rgba(225, 48, 108, 0.09), rgba(247, 119, 55, 0.08)),
+        #fff7fb;
+    }
+
+    [data-theme="dark"] .instagram-demo {
+      background:
+        linear-gradient(135deg, rgba(225, 48, 108, 0.16), rgba(64, 93, 230, 0.13)),
+        #1d1320;
+    }
+
+    .phone-shell {
+      width: min(100%, 376px);
+      min-height: 600px;
+      overflow: hidden;
+      border: 1px solid rgba(225, 48, 108, 0.2);
+      border-radius: 34px;
+      color: var(--ig-ink);
+      background: #fffafd;
+      box-shadow: 0 26px 70px rgba(225, 48, 108, 0.18);
+    }
+
+    .phone-status {
+      position: relative;
+      min-height: 42px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      color: #2b2028;
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .ios-time {
+      justify-self: start;
+    }
+
+    .dynamic-island {
+      width: 82px;
+      height: 22px;
+      border-radius: 999px;
+      background: #15151a;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .ios-indicators {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-bars {
+      display: inline-flex;
+      align-items: end;
       gap: 2px;
     }
 
-    .nav-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      padding: 0 8px;
-      margin-bottom: 4px;
-      margin-top: 8px;
+    .signal-bars span {
+      width: 3px;
+      border-radius: 999px;
+      background: currentColor;
     }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 8px;
-      border-radius: 6px;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-      gap: 8px;
+    .signal-bars span:nth-child(1) {
+      height: 5px;
+      opacity: 0.55;
     }
 
-    .nav-item:hover, .nav-item.active {
-      background: var(--border);
-      color: var(--text-primary);
+    .signal-bars span:nth-child(2) {
+      height: 7px;
+      opacity: 0.75;
     }
 
-    .nav-item-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .signal-bars span:nth-child(3) {
+      height: 9px;
     }
 
-    .nav-icon {
-      width: 16px;
-      height: 16px;
-      opacity: 0.6;
-      flex-shrink: 0;
+    .wifi-dot {
+      width: 8px;
+      height: 8px;
+      border: 2px solid currentColor;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      transform: rotate(-45deg);
     }
 
-    .nav-num {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      font-variant-numeric: tabular-nums;
+    .battery {
+      position: relative;
+      width: 20px;
+      height: 10px;
+      border: 1.5px solid currentColor;
+      border-radius: 3px;
     }
 
-    /* Theme toggle at bottom of sidebar */
-    .sidebar-bottom {
-      margin-top: auto;
-      display: flex;
-      gap: 6px;
-      padding: 0 8px;
+    .battery::before {
+      content: "";
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      width: 12px;
+      height: 4px;
+      border-radius: 1px;
+      background: currentColor;
     }
 
-    .theme-btn {
-      flex: 1;
-      padding: 6px 0;
-      font-size: 0.75rem;
-      font-family: var(--font-body);
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--transition);
+    .battery::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 3px;
+      width: 2px;
+      height: 4px;
+      border-radius: 0 2px 2px 0;
+      background: currentColor;
     }
 
-    .theme-btn:hover, .theme-btn.active {
-      background: var(--border);
-      color: var(--text-primary);
-    }
-
-    /* =====================
-       MAIN CONTENT
-    ===================== */
-    .main {
-      margin-left: var(--sidebar-width);
-      flex: 1;
-      padding: 64px 72px;
-      max-width: 860px;
-      animation: fadeUp 0.5s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* =====================
-       GREETING
-    ===================== */
-    .greeting {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-
-    .greeting-sub {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 48px;
-    }
-
-    /* =====================
-       HINT CARDS GRID
-    ===================== */
-    .cards-grid {
+    .phone-home {
+      min-height: 558px;
+      padding: var(--space-4);
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 56px;
+      align-content: space-between;
+      gap: var(--space-4);
+      background:
+        linear-gradient(160deg, rgba(247, 119, 55, 0.16), rgba(225, 48, 108, 0.12) 44%, rgba(64, 93, 230, 0.14)),
+        #fffafd;
     }
 
-    .hint-card {
-      background: var(--surface);
-      padding: 20px 22px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      transition: background var(--transition);
-    }
-
-    .hint-card:hover {
-      background: var(--accent-light);
-    }
-
-    .hint-card a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    /* =====================
-       UPDATES SECTION
-    ===================== */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      letter-spacing: -0.01em;
-    }
-
-    .view-all {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      transition: color var(--transition);
-    }
-
-    .view-all:hover { color: var(--accent); }
-
-    .updates-grid {
+    .phone-widget {
+      min-height: 86px;
+      border: 1px solid rgba(225, 48, 108, 0.13);
+      border-radius: 22px;
+      padding: var(--space-3);
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      align-content: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
     }
 
-    .update-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      transition: border-color var(--transition), transform var(--transition);
-      cursor: pointer;
+    .phone-widget strong,
+    .phone-widget span {
+      display: block;
     }
 
-    .update-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
+    .phone-widget strong {
+      font-size: 15px;
     }
 
-    .update-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
-
-    .update-title {
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: var(--text-primary);
+    .phone-widget span {
+      color: var(--ig-muted);
+      font-size: 12px;
       line-height: 1.35;
     }
 
-    .update-desc {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 10px;
+    .app-grid,
+    .phone-dock {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
     }
 
-    .update-date {
-      font-size: 0.72rem;
-      color: var(--text-muted);
+    .app-tile {
+      min-width: 0;
+      border: 0;
+      padding: 0;
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      color: var(--ig-ink);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 620;
+      text-align: center;
     }
 
-    /* =====================
-       PROJECTS SECTION
-    ===================== */
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 48px;
-    }
-
-    .project-row {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color var(--transition), transform var(--transition);
+    button.app-tile {
       cursor: pointer;
     }
 
-    .project-row:hover {
-      border-color: var(--accent);
-      transform: translateX(4px);
+    .app-icon-shell,
+    .healthy-app-icon {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 22px rgba(65, 47, 58, 0.12);
     }
 
-    .project-thumb {
-      width: 52px;
-      height: 52px;
-      border-radius: 8px;
-      background: var(--accent-light);
+    .app-icon-shell {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: rgba(37, 22, 33, 0.6);
+      background: var(--app-bg, rgba(255, 255, 255, 0.58));
+    }
+
+    .app-icon-shell svg,
+    .healthy-app-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .healthy-app-icon {
+      color: #fff;
+      background: linear-gradient(135deg, var(--ig-orange), var(--ig-pink) 48%, var(--ig-blue));
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    button.app-tile:hover .healthy-app-icon,
+    button.app-tile:focus-visible .healthy-app-icon {
+      box-shadow: 0 16px 32px rgba(225, 48, 108, 0.28);
+      transform: translateY(-2px);
+    }
+
+    button.app-tile:focus-visible {
+      outline: none;
+    }
+
+    .healthy-badge {
+      position: absolute;
+      right: -5px;
+      top: -5px;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #fffafd;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--ig-pink);
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .phone-dock {
+      padding: var(--space-3);
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.48);
+      backdrop-filter: blur(12px);
+    }
+
+    .phone-dock .app-icon-shell {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto;
+      border-radius: 14px;
+    }
+
+    .healthy-screen h3,
+    .healthy-screen p {
+      margin: 0;
+    }
+
+    .healthy-screen h3 {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .healthy-screen p {
+      color: var(--ig-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .healthy-screen {
+      min-height: 558px;
+      padding: var(--space-4);
+      display: grid;
+      align-content: start;
+      gap: var(--space-4);
+      background: #fffafd;
+    }
+
+    .healthy-top {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
+      justify-content: space-between;
+      gap: var(--space-3);
     }
 
-    .project-info { flex: 1; }
-
-    .project-name {
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 3px;
+    .healthy-top strong {
+      display: block;
+      font-size: 15px;
     }
 
-    .project-desc {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+    .healthy-top span {
+      color: var(--ig-pink);
+      font-size: 12px;
+      font-weight: 720;
     }
 
-    .project-tags {
+    .healthy-pill {
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 0 var(--space-3);
+      display: inline-flex;
+      align-items: center;
+      color: var(--ig-pink);
+      background: rgba(225, 48, 108, 0.1);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .intent-grid {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .intent-button {
+      min-height: 54px;
+      border: 1px solid rgba(225, 48, 108, 0.16);
+      border-radius: var(--radius-1);
+      padding: var(--space-3);
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--ig-ink);
+      background: #ffffff;
+      cursor: pointer;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 720;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
-    .tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      background: var(--border);
-      border-radius: 20px;
-      color: var(--text-secondary);
+    .intent-button:hover,
+    .intent-button:focus-visible,
+    .intent-button[aria-pressed="true"] {
+      border-color: var(--ig-pink);
+      background: #fff0f6;
+      outline: none;
     }
 
-    /* =====================
-       PAGES (show/hide)
-    ===================== */
-    .page { display: none; animation: fadeUp 0.35s ease both; }
-    .page.active { display: block; }
-
-    /* =====================
-       ABOUT PAGE
-    ===================== */
-    .about-content {
-      max-width: 560px;
+    .intent-button:active {
+      transform: scale(0.98);
     }
 
-    .about-content h2 {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
+    .intent-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      color: var(--ig-pink);
+      background: #fff0f6;
+      flex: 0 0 auto;
     }
 
-    .about-content p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin-bottom: 16px;
+    .intent-panel {
+      border: 1px solid rgba(225, 48, 108, 0.16);
+      border-radius: var(--radius-1);
+      padding: var(--space-3);
+      display: grid;
+      gap: var(--space-3);
+      background: #ffffff;
     }
 
-    /* =====================
-       MOBILE
-    ===================== */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        min-height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
+    .healthy-input {
+      min-height: 40px;
+      border: 1px solid rgba(225, 48, 108, 0.16);
+      border-radius: var(--radius-1);
+      padding: 0 var(--space-3);
+      color: var(--ig-ink);
+      background: #fff8fb;
+    }
+
+    .healthy-list {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .healthy-row {
+      min-height: 42px;
+      border-radius: var(--radius-1);
+      padding: var(--space-2) var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      color: var(--ig-muted);
+      background: #fff5fa;
+      font-size: 13px;
+    }
+
+    .timer-strip {
+      min-height: 42px;
+      border-radius: var(--radius-1);
+      padding: 0 var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #8c153f;
+      background: #fff0f6;
+      font-weight: 780;
+    }
+
+    @media (max-width: 1080px) {
+      .site-shell {
+        grid-template-columns: 1fr;
+        padding: var(--space-5);
+      }
+
+      .intro-panel {
         position: relative;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 16px;
-        gap: 12px;
+        top: 0;
+        padding: var(--space-3) 0 0;
       }
-      .main {
-        margin-left: 0;
-        padding: 32px 20px;
+
+      .intro-copy {
+        max-width: 24rem;
       }
-      .updates-grid { grid-template-columns: 1fr 1fr; }
-      .cards-grid { grid-template-columns: 1fr; }
-      body { flex-direction: column; }
-      .nav-section { flex-direction: row; flex-wrap: wrap; }
-      .nav-label { display: none; }
-      .sidebar-bottom { margin-top: 0; }
+
+    }
+
+    @media (max-width: 760px) {
+      .site-shell {
+        padding: var(--space-4);
+      }
+
+      .theme-toggle {
+        top: 12px;
+        right: 12px;
+      }
+
+      .demo-wrap {
+        padding: var(--space-4);
+      }
+
+      .demo-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-frame {
+        min-height: auto;
+      }
+
+      .spotify-demo,
+      .notion-demo {
+        grid-template-columns: 1fr;
+      }
+
+      .spotify-sidebar,
+      .notion-side {
+        display: none;
+      }
+
+      .spotify-hero {
+        grid-template-columns: 82px minmax(0, 1fr);
+      }
+
+      .spotify-title {
+        font-size: 25px;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+      .intro-copy {
+        max-width: 100%;
+        font-size: 23px;
+      }
+
+      .worked-line {
+        white-space: normal;
+      }
+
+      .demo-title {
+        font-size: 21px;
+      }
+
+      .spotify-actions,
+      .spotify-table,
+      .spotify-hero {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+      }
     }
   </style>
 </head>
 <body>
+  <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch theme"></button>
 
-  <!-- =====================
-       SIDEBAR
-  ===================== -->
-  <aside class="sidebar">
-    <!-- 🔧 CHANGE THIS: your name -->
-    <div class="logo">Yiwei Han</div>
+  <div class="site-shell">
+    <aside class="intro-panel">
+      <div>
+        <p class="intro-copy">
+          <span class="intro-line"><span data-greeting>Good morning</span>~</span>
+          <span class="intro-line">I'm Yiwei, a product designer.</span>
+          <span class="intro-line worked-line">who has not worked at <span class="company-picker"><button class="active-company" id="activeCompany" type="button" aria-haspopup="listbox" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.14"/><path d="M7 10.2c3.5-1.2 7.1-.8 10.2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8 13.1c2.5-.8 5-.6 7.3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Spotify</span></button><span class="company-popover" id="companyPopover" role="listbox" aria-label="Choose a product-inspired demo">
+              <button class="company-option" type="button" role="option" aria-selected="true" data-product-option="spotify">
+                <span class="brand-mark brand-spotify" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.14"/><path d="M7 9.5c3.7-1.2 7.4-.8 10.5.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8 12.7c2.7-.8 5.2-.5 7.4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M9 15.7c1.8-.4 3.4-.3 4.9.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                </span>
+                <span class="option-copy">
+                  <span class="option-name">Spotify</span>
+                  <span class="option-line">Multi-select playlists</span>
+                </span>
+                <span class="option-arrow" aria-hidden="true">-></span>
+              </button>
+              <button class="company-option" type="button" role="option" aria-selected="false" data-product-option="notion">
+                <span class="brand-mark brand-notion" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M6.4 4.4 17 3.6l1.6 1.3v14.2L17 20.4l-10.7-.9-1.1-1.3V5.8l1.2-1.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.6 8.1h2l3.1 5.4V8.1h1.7v8h-1.9l-3.2-5.5v5.5H8.6V8.1Z" fill="currentColor"/></svg>
+                </span>
+                <span class="option-copy">
+                  <span class="option-name">Notion</span>
+                  <span class="option-line">Cell color overrides</span>
+                </span>
+                <span class="option-arrow" aria-hidden="true">-></span>
+              </button>
+              <button class="company-option" type="button" role="option" aria-selected="false" data-product-option="instagram">
+                <span class="brand-mark brand-instagram" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16.4" cy="7.8" r="1" fill="currentColor"/></svg>
+                </span>
+                <span class="option-copy">
+                  <span class="option-name">Instagram</span>
+                  <span class="option-line">Healthy mode</span>
+                </span>
+                <span class="option-arrow" aria-hidden="true">-></span>
+              </button>
+            </span></span>.</span>
+        </p>
 
-    <nav class="nav-section">
-      <div class="nav-item active" onclick="showPage('home', this)">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l6-4 6 4v8H2z"/></svg>
-          Home
-        </div>
-        <span class="nav-num">1</span>
-      </div>
-      <div class="nav-item" onclick="showPage('about', this)">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
-          About
-        </div>
-        <span class="nav-num">2</span>
-      </div>
-      <div class="nav-item" onclick="showPage('projects', this)">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
-          Projects
-        </div>
-        <span class="nav-num">3</span>
-      </div>
-      <div class="nav-item" onclick="showPage('writing', this)">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>
-          Writing
-        </div>
-        <span class="nav-num">4</span>
-      </div>
-    </nav>
-
-    <nav class="nav-section">
-      <div class="nav-label">Stay in touch</div>
-      <div class="nav-item">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 5l6 4 6-4"/></svg>
-          Contact
-        </div>
-      </div>
-      <div class="nav-item">
-        <div class="nav-item-left">
-          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 3L8 8M3 7l3 1 1 3 6-5"/></svg>
-          Twitter / X
-        </div>
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.4"><path d="M2 8L8 2M4 2h4v4"/></svg>
-      </div>
-    </nav>
-
-    <div class="sidebar-bottom">
-      <button class="theme-btn active" onclick="setTheme('light', this)">Light</button>
-      <button class="theme-btn" onclick="setTheme('dark', this)">Dark</button>
-    </div>
-  </aside>
-
-  <!-- =====================
-       MAIN
-  ===================== -->
-  <main class="main">
-
-    <!-- HOME PAGE -->
-    <div class="page active" id="page-home">
-
-      <!-- 🔧 CHANGE: greeting is auto time-based, but tweak the sub text -->
-      <h1 class="greeting" id="greeting">Good morning</h1>
-      <p class="greeting-sub">
-        My name is Yiwei Han — Welcome to my site. I'm a product designer / developer / creative based in Manchester, UK.
-      </p>
-
-      <div class="cards-grid">
-        <div class="hint-card">Use keyboard shortcuts 1–4 to navigate between pages.</div>
-        <div class="hint-card">Don't know me yet? I'm Yiwei, I love playing guitar. <a href="#">More about me →</a></div>
-        <div class="hint-card">I enjoy meeting people and helping where I can. <a href="#">Open calendar ↗</a></div>
-        <div class="hint-card">If you're curious how this site was built, I have notes on it. <a href="#">Check it out →</a></div>
+        <p class="caption">
+          but it doesn't mean I can't make improvements for them.
+        </p>
       </div>
 
-      <div class="section-header">
-        <h2 class="section-title">Updates</h2>
-        <a href="#" class="view-all">View All</a>
+      <div class="panel-footer" aria-label="Contact links">
+        <a href="mailto:daviflasd08@gmail.com">Email</a>
+        <span>/</span>
+        <a href="https://github.com/YiweiHan08">GitHub</a>
+        <span>/</span>
+        <a href="https://www.linkedin.com/in/yiwei-han/">LinkedIn</a>
+        <span>/</span>
+        <a href="https://yiweihan.com/">Previous site</a>
+        <span>/</span>
+        <a href="https://www.figma.com/deck/IvbGWJYSukvFO6nAvgrRNY/Yiwei-Han-Portfolio-2026?node-id=164-159&amp;t=8U351lGZ3CM8xcSD-8&amp;hide-ui=1">Previous works</a>
       </div>
+    </aside>
 
-      <!-- 🔧 CHANGE: swap in your own updates -->
-      <div class="updates-grid">
-        <div class="update-card">
-          <div class="update-icon">🚀</div>
-          <div class="update-title">Launched this website</div>
-          <div class="update-desc">Built with plain HTML & CSS. First step on the journey.</div>
-          <div class="update-date">Mar 2026</div>
-        </div>
-        <div class="update-card">
-          <div class="update-icon">✏️</div>
-          <div class="update-title">Started writing online</div>
-          <div class="update-desc">Sharing notes on design, code, and things I'm learning.</div>
-          <div class="update-date">Mar 2026</div>
-        </div>
-        <div class="update-card">
-          <div class="update-icon">🎓</div>
-          <div class="update-title">Learning design engineering</div>
-          <div class="update-desc">Bridging the gap between design and code.</div>
-          <div class="update-date">Jan 2026</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABOUT PAGE -->
-    <div class="page" id="page-about">
-      <div class="about-content">
-        <h2>About me</h2>
-        <!-- 🔧 CHANGE: write your own bio -->
-        <p>Hi, I'm Yiwei Han. I'm a product designer based in Manchester, currently working @AeroCloud.</p>
-        <p>I care about [values]. Before this, I [past experience]. I'm now focused on [current focus].</p>
-        <p>Outside of work, I [hobbies / interests].</p>
-      </div>
-    </div>
-
-    <!-- PROJECTS PAGE -->
-    <div class="page" id="page-projects">
-      <h2 class="section-title" style="margin-bottom: 8px;">Projects</h2>
-      <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 32px;">
-        A selection of things I've built or worked on.
-      </p>
-
-      <!-- 🔧 CHANGE: add your own projects -->
-      <div class="projects-list">
-        <div class="project-row">
-          <div class="project-thumb">🌐</div>
-          <div class="project-info">
-            <div class="project-name">This Website</div>
-            <div class="project-desc">Personal site built from scratch with HTML, CSS & JS</div>
+    <main class="demo-panel">
+      <section class="demo-wrap" aria-live="polite">
+        <header class="demo-heading">
+          <div>
+            <p class="demo-eyebrow" id="demoEyebrow">Not employed there. Still opinionated.</p>
+            <h1 class="demo-title" id="demoTitle">Playlist triage, without breaking flow</h1>
+            <p class="demo-note" id="demoNote">Select a few tracks, right-click once, and turn scattered liked songs into a focused playlist without leaving the table.</p>
           </div>
-          <div class="project-tags">
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-          </div>
-        </div>
-        <div class="project-row">
-          <div class="project-thumb">📐</div>
-          <div class="project-info">
-            <div class="project-name">Project Two</div>
-            <div class="project-desc">A short description of what this project does</div>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Design</span>
-          </div>
-        </div>
-        <div class="project-row">
-          <div class="project-thumb">💡</div>
-          <div class="project-info">
-            <div class="project-name">Project Three</div>
-            <div class="project-desc">A short description of what this project does</div>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Code</span>
-          </div>
-        </div>
-      </div>
-    </div>
+        </header>
 
-    <!-- WRITING PAGE -->
-    <div class="page" id="page-writing">
-      <h2 class="section-title" style="margin-bottom: 8px;">Writing</h2>
-      <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 32px;">
-        Notes, essays, and things I've learned.
-      </p>
-      <p style="color: var(--text-muted); font-size: 0.875rem;">Nothing here yet — coming soon.</p>
-    </div>
+        <div class="demo-stage" id="demoStage"></div>
 
-  </main>
+      </section>
+    </main>
+  </div>
 
-  <!-- =====================
-       JAVASCRIPT
-  ===================== -->
   <script>
-    // --- TIME-BASED GREETING ---
-    function setGreeting() {
+    const productOrder = ["spotify", "notion", "instagram"];
+
+    const productMeta = {
+      spotify: {
+        name: "Spotify",
+        title: "Playlist triage, without breaking flow",
+        note: "Select a few tracks, right-click once, and turn scattered liked songs into a focused playlist without leaving the table.",
+        color: "#1ed760",
+        soft: "#e8f8ef",
+        icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.14"/><path d="M7 10.2c3.5-1.2 7.1-.8 10.2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8 13.1c2.5-.8 5-.6 7.3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'
+      },
+      notion: {
+        name: "Notion",
+        title: "Cell colors without table drama",
+        note: "Notion can color rows and columns, but one cell often carries the signal. This adds right-click cell color overrides and a quick remove option.",
+        color: "#111111",
+        darkColor: "#ffffff",
+        soft: "#f1f1f1",
+        icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 4.4 17 3.6l1.6 1.3v14.2L17 20.4l-10.7-.9-1.1-1.3V5.8l1.2-1.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.6 8.1h2l3.1 5.4V8.1h1.7v8h-1.9l-3.2-5.5v5.5H8.6V8.1Z" fill="currentColor"/></svg>'
+      },
+      instagram: {
+        name: "Instagram",
+        title: "Healthy Mode: Take charge",
+        note: "Open Instagram with an intention first: search, post, message, or check friends for five minutes, so the app starts with purpose instead of an infinite feed.",
+        color: "#e1306c",
+        soft: "#fff0f6",
+        icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16.4" cy="7.8" r="1" fill="currentColor"/></svg>'
+      }
+    };
+
+    const spotifySongs = [
+      { id: "liminal-bass", title: "Liminal Bass in a Clean Room", artist: "Moss Bureau", album: "Productive Avoidance", added: "Today", time: "3:42", a: "#b9f7d2", b: "#1ed760" },
+      { id: "modal-window", title: "Modal Window at Midnight", artist: "Soft Error", album: "Tiny Decisions", added: "Yesterday", time: "4:08", a: "#b6c2ff", b: "#6f43ff" },
+      { id: "undo-stack", title: "Undo Stack Romance", artist: "Northstar Offline", album: "Version Control", added: "2 days ago", time: "3:17", a: "#ffd5e4", b: "#e1306c" },
+      { id: "save-state", title: "Save State for a Sunday", artist: "Lena Trace", album: "Draft Feelings", added: "Apr 20", time: "2:58", a: "#ffe2a8", b: "#f77737" },
+      { id: "cursor-drift", title: "Cursor Drift", artist: "Jay Oliver", album: "Click Paths", added: "Apr 18", time: "5:01", a: "#cef5ff", b: "#39a6d8" },
+      { id: "borrowed-sun", title: "Borrowed Sunlight", artist: "Desk Plant", album: "Windowsill", added: "Apr 14", time: "3:36", a: "#f4f1bd", b: "#80b060" },
+      { id: "shipping-label", title: "Shipping Label With Feelings", artist: "The Friendly Edge Case", album: "Almost Done", added: "Apr 11", time: "4:25", a: "#ffc9b6", b: "#9b5bff" }
+    ];
+
+    const state = {
+      active: "spotify",
+      theme: "light",
+      spotify: {
+        selected: new Set(["liminal-bass", "undo-stack"]),
+        menu: null,
+        toast: ""
+      },
+      notion: {
+        cellColors: {
+          "build-risk": "blue",
+          "launch-owner": "green"
+        },
+        menu: null
+      },
+      instagram: {
+        opened: false,
+        intent: null
+      }
+    };
+
+    function getTimeSettings() {
       const hour = new Date().getHours();
-      const el = document.getElementById('greeting');
-      if (hour < 12)      el.textContent = 'Good morning.';
-      else if (hour < 17) el.textContent = 'Good afternoon.';
-      else                el.textContent = 'Good evening.';
-    }
-    setGreeting();
-
-    // --- PAGE NAVIGATION ---
-    function showPage(name, navEl) {
-      // Hide all pages
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      // Remove active from nav items
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      // Show selected
-      document.getElementById('page-' + name).classList.add('active');
-      if (navEl) navEl.classList.add('active');
+      if (hour >= 5 && hour < 12) return { greeting: "Good morning", theme: "light" };
+      if (hour >= 12 && hour < 18) return { greeting: "Good afternoon", theme: "light" };
+      if (hour >= 18 && hour < 22) return { greeting: "Good evening", theme: "dark" };
+      return { greeting: "Good night", theme: "dark" };
     }
 
-    // Keyboard shortcuts 1-4
-    document.addEventListener('keydown', (e) => {
-      const pages = ['home', 'about', 'projects', 'writing'];
-      const idx = parseInt(e.key) - 1;
-      if (idx >= 0 && idx < pages.length) {
-        const navItems = document.querySelectorAll('.nav-item');
-        showPage(pages[idx], navItems[idx]);
+    function themeIcon(theme) {
+      if (theme === "dark") {
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2.5M12 18.5V21M4.2 4.2l1.8 1.8M18 18l1.8 1.8M3 12h2.5M18.5 12H21M4.2 19.8 6 18M18 6l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+      }
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5A8.3 8.3 0 0 1 8.5 4 7.8 7.8 0 1 0 20 15.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+    }
+
+    function applyTheme(theme, persist) {
+      state.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      document.getElementById("themeToggle").innerHTML = themeIcon(theme);
+      document.getElementById("themeToggle").setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      if (persist) localStorage.setItem("yiwei-theme", theme);
+      applyProductBrand(state.active);
+    }
+
+    function applyProductBrand(product) {
+      const meta = productMeta[product];
+      const color = state.theme === "dark" && meta.darkColor ? meta.darkColor : meta.color;
+      document.documentElement.style.setProperty("--brand-color", color);
+      document.documentElement.style.setProperty("--brand-soft", meta.soft);
+    }
+
+    function setupTheme() {
+      const timeSettings = getTimeSettings();
+      const savedTheme = localStorage.getItem("yiwei-theme");
+      document.querySelector("[data-greeting]").textContent = timeSettings.greeting;
+      applyTheme(savedTheme || timeSettings.theme, false);
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        applyTheme(state.theme === "dark" ? "light" : "dark", true);
+      });
+    }
+
+    function selectProduct(product) {
+      if (!productMeta[product]) product = "spotify";
+      state.active = product;
+      const meta = productMeta[product];
+
+      applyProductBrand(product);
+      updateProductOptions(product);
+      document.getElementById("activeCompany").innerHTML = meta.icon + "<span>" + meta.name + "</span>";
+      document.getElementById("activeCompany").setAttribute("aria-label", "Current product: " + meta.name + ". Click or scroll to change.");
+      document.getElementById("demoTitle").textContent = meta.title;
+      document.getElementById("demoNote").textContent = meta.note;
+      document.getElementById("demoStage").innerHTML = renderDemo(product);
+      hydrateDemo(product);
+      history.replaceState(null, "", "#" + product);
+    }
+
+    function updateProductOptions(product) {
+      const current = productOrder.indexOf(product);
+      const prev = productOrder[(current - 1 + productOrder.length) % productOrder.length];
+      const next = productOrder[(current + 1) % productOrder.length];
+      const layout = { [prev]: 0, [product]: 1, [next]: 2 };
+
+      document.querySelectorAll("[data-product-option]").forEach((button) => {
+        const selected = button.dataset.productOption === product;
+        const position = selected ? "current" : button.dataset.productOption === prev ? "prev" : "next";
+        button.style.order = layout[button.dataset.productOption];
+        button.dataset.wheelPosition = position;
+        button.setAttribute("aria-selected", String(selected));
+      });
+    }
+
+    function cycleProduct(direction) {
+      const current = productOrder.indexOf(state.active);
+      const next = (current + direction + productOrder.length) % productOrder.length;
+      selectProduct(productOrder[next]);
+    }
+
+    function renderDemo(product) {
+      if (product === "spotify") return renderSpotify();
+      if (product === "notion") return renderNotion();
+      return renderInstagram();
+    }
+
+    function selectedSpotifySongs() {
+      return spotifySongs.filter((song) => state.spotify.selected.has(song.id));
+    }
+
+    function renderSpotify() {
+      const selectedCount = state.spotify.selected.size;
+      const allSelected = selectedCount === spotifySongs.length;
+      const menu = state.spotify.menu;
+
+      return `
+        <div class="demo-frame spotify-demo">
+          <aside class="spotify-sidebar">
+            <div class="spotify-logo">
+              ${productMeta.spotify.icon}
+              <span>Not-Spotify</span>
+            </div>
+            <nav class="spotify-nav" aria-label="Demo navigation">
+              <span>Home</span>
+              <span>Liked songs</span>
+              <span>Playlists</span>
+              <span>New list lab</span>
+            </nav>
+          </aside>
+
+          <section class="spotify-main">
+            <header class="spotify-hero">
+              <div class="spotify-cover" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6.5 12.4c3.6-1.2 7.3-.8 10.5.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 15.2c2.4-.7 4.8-.4 6.8.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <p class="song-meta">Playlist prototype</p>
+                <h2 class="spotify-title">Playlist triage</h2>
+                <p class="spotify-copy">First-column checkboxes plus one right-click action for turning scattered liked songs into a cleaner new list.</p>
+              </div>
+            </header>
+
+            <div class="spotify-actions">
+              <button class="spotify-play" type="button" aria-label="Play demo">P</button>
+              <span class="selection-status">${selectedCount ? selectedCount + " selected" : "Select songs, then right-click a row"}</span>
+              ${state.spotify.toast ? `<span class="spotify-toast">${state.spotify.toast}</span>` : ""}
+            </div>
+
+            <div class="spotify-table">
+              <div class="song-head">
+                <label class="song-checkbox" aria-label="Select all songs">
+                  <input type="checkbox" data-select-all ${allSelected ? "checked" : ""}>
+                  <span></span>
+                </label>
+                <span>Title</span>
+                <span>Album</span>
+                <span>Added</span>
+                <span>Time</span>
+              </div>
+
+              ${spotifySongs.map((song) => `
+                <div class="song-row" tabindex="0" data-song-row="${song.id}" data-selected="${state.spotify.selected.has(song.id)}">
+                  <label class="song-checkbox" aria-label="Select ${song.title}">
+                    <input type="checkbox" data-song-check="${song.id}" ${state.spotify.selected.has(song.id) ? "checked" : ""}>
+                    <span></span>
+                  </label>
+                  <div class="song-title-cell">
+                    <span class="song-art" style="--art-a:${song.a}; --art-b:${song.b}" aria-hidden="true"></span>
+                    <span>
+                      <span class="song-title">${song.title}</span>
+                      <span class="song-meta">${song.artist}</span>
+                    </span>
+                  </div>
+                  <span class="song-album">${song.album}</span>
+                  <span class="song-added">${song.added}</span>
+                  <span class="song-time">${song.time}</span>
+                </div>
+              `).join("")}
+            </div>
+
+            ${menu ? `
+              <div class="spotify-context-menu" style="left:${menu.x}px; top:${menu.y}px">
+                <button type="button" data-spotify-action="new-list">Add ${selectedCount} song${selectedCount === 1 ? "" : "s"} to a new list</button>
+                <button type="button" data-spotify-action="focus-queue">Send ${selectedCount} to focus queue</button>
+                <button type="button" data-spotify-action="clear-selection">Clear selection</button>
+              </div>
+            ` : ""}
+          </section>
+        </div>
+      `;
+    }
+
+    function renderNotion() {
+      const colorMap = {
+        green: "#dff3e7",
+        blue: "#dbeafe",
+        yellow: "#fff4c7",
+        pink: "#fde2ef"
+      };
+      const menu = state.notion.menu;
+      const menuColor = menu ? state.notion.cellColors[menu.cell] : null;
+      const table = [
+        [
+          { id: "build-name", main: "Build polish", sub: "Prototype QA" },
+          { id: "build-status", main: "In progress", sub: "2 open issues" },
+          { id: "build-risk", main: "Risk: medium", sub: "Edge states" },
+          { id: "build-owner", main: "Yiwei", sub: "Review Friday" }
+        ],
+        [
+          { id: "launch-name", main: "Launch prep", sub: "Portfolio page" },
+          { id: "launch-status", main: "Ready-ish", sub: "Copy pass left" },
+          { id: "launch-risk", main: "Risk: low", sub: "Visual check" },
+          { id: "launch-owner", main: "Design", sub: "Owns final call" }
+        ],
+        [
+          { id: "research-name", main: "Research notes", sub: "3 interviews" },
+          { id: "research-status", main: "Needs sorting", sub: "Too many gems" },
+          { id: "research-risk", main: "Risk: high", sub: "Context loss" },
+          { id: "research-owner", main: "Future Yiwei", sub: "Good luck" }
+        ]
+      ];
+      const headers = ["Project", "Status", "Signal", "Owner"];
+
+      return `
+        <div class="demo-frame notion-demo">
+          <div class="notion-toolbar">
+            <div class="notion-brand">${productMeta.notion.icon}<span>Notion table lab</span></div>
+            <span class="table-hint">Right-click any cell</span>
+          </div>
+
+          <div class="notion-table-wrap">
+            <div class="notion-table">
+              ${headers.map((header) => `<div class="notion-cell" data-header="true">${header}</div>`).join("")}
+              ${table.flat().map((cell) => {
+                const color = state.notion.cellColors[cell.id];
+                return `
+                  <button class="notion-cell" type="button" data-cell="${cell.id}" style="--cell-bg:${color ? colorMap[color] : "transparent"}">
+                    <strong>${cell.main}</strong>
+                    <small>${cell.sub}${color ? " - cell override" : ""}</small>
+                  </button>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          <div class="cell-legend">
+            <span class="legend-chip"><span class="legend-dot" style="--dot:${colorMap.blue}"></span> Override one important cell</span>
+            <span class="legend-chip"><span class="legend-dot" style="--dot:${colorMap.green}"></span> Keep row and column color intact</span>
+          </div>
+
+          ${menu ? `
+            <div class="notion-context-menu" style="left:${menu.x}px; top:${menu.y}px">
+              <p>Cell color override</p>
+              <button type="button" data-notion-color="green"><span class="menu-swatch" style="--swatch:${colorMap.green}"></span>Green background</button>
+              <button type="button" data-notion-color="blue"><span class="menu-swatch" style="--swatch:${colorMap.blue}"></span>Blue background</button>
+              <button type="button" data-notion-color="yellow"><span class="menu-swatch" style="--swatch:${colorMap.yellow}"></span>Yellow background</button>
+              <button type="button" data-notion-color="pink"><span class="menu-swatch" style="--swatch:${colorMap.pink}"></span>Pink background</button>
+              ${menuColor ? '<button type="button" data-notion-color="remove"><span class="menu-swatch" style="--swatch:transparent"></span>Remove override</button>' : ""}
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    function renderInstagram() {
+      const instagram = state.instagram;
+      const homeApps = [
+        { label: "Calendar", mark: "27", bg: "linear-gradient(135deg, #ffffff, #f1f1f5)" },
+        { label: "Photos", mark: "P", bg: "linear-gradient(135deg, #ffe58a, #ff8aa6 45%, #8d7cff)" },
+        { label: "Notes", mark: "N", bg: "linear-gradient(135deg, #fff3a8, #ffffff)" },
+        { label: "Maps", mark: "M", bg: "linear-gradient(135deg, #c8f7d4, #9dc7ff)" },
+        { label: "Mail", mark: "M", bg: "linear-gradient(135deg, #bde2ff, #4e8cff)" },
+        { label: "Weather", mark: "W", bg: "linear-gradient(135deg, #ffe6a6, #89c7ff)" },
+        { label: "Music", mark: "M", bg: "linear-gradient(135deg, #ff6f9f, #ff2d55)" },
+        { label: "Wallet", mark: "W", bg: "linear-gradient(135deg, #d6d9e4, #f8f8fb)" },
+        { label: "Camera", mark: "C", bg: "linear-gradient(135deg, #eeeeee, #9ea7b7)" },
+        { label: "Clock", mark: "C", bg: "linear-gradient(135deg, #ffffff, #d7dae3)" },
+        { label: "Settings", mark: "S", bg: "linear-gradient(135deg, #f6f7fb, #c4c9d4)" }
+      ];
+      const dockApps = [
+        { label: "Phone", mark: "P", bg: "linear-gradient(135deg, #7df2a5, #22c55e)" },
+        { label: "Safari", mark: "S", bg: "linear-gradient(135deg, #d9f6ff, #64a7ff)" },
+        { label: "Messages", mark: "M", bg: "linear-gradient(135deg, #b9ffca, #1fc866)" },
+        { label: "Camera", mark: "C", bg: "linear-gradient(135deg, #f7f7f7, #b9bec9)" }
+      ];
+      const intentLabels = {
+        search: ["Search a person", "Find a profile without opening Explore."],
+        post: ["Post something", "Share, then leave before the scroll finds you."],
+        message: ["Message a friend", "Go straight to the conversation."],
+        friends: ["Check friends for 5 min", "Updates with a visible exit."]
+      };
+
+      function renderPhoneStatus() {
+        return `
+          <div class="phone-status" aria-label="Phone status">
+            <span class="ios-time">10:42</span>
+            <span class="dynamic-island" aria-hidden="true"></span>
+            <span class="ios-indicators" aria-hidden="true">
+              <span class="signal-bars"><span></span><span></span><span></span></span>
+              <span class="wifi-dot"></span>
+              <span class="battery"></span>
+            </span>
+          </div>
+        `;
+      }
+
+      function renderMutedApp(app) {
+        return `
+          <span class="app-tile" aria-hidden="true">
+            <span class="app-icon-shell" style="--app-bg:${app.bg}"><span>${app.mark}</span></span>
+            <span>${app.label}</span>
+          </span>
+        `;
+      }
+
+      function renderIntentPanel() {
+        if (instagram.intent === "search") {
+          return `
+            <div class="intent-panel">
+              <input class="healthy-input" value="" placeholder="Search a name or handle" aria-label="Search a person">
+              <div class="healthy-list">
+                <span class="healthy-row"><strong>Design friend</strong><span>profile</span></span>
+                <span class="healthy-row"><strong>Manchester studio</strong><span>recent</span></span>
+                <span class="healthy-row"><strong>Saved collaborator</strong><span>message</span></span>
+              </div>
+            </div>
+          `;
+        }
+
+        if (instagram.intent === "post") {
+          return `
+            <div class="intent-panel">
+              <span class="healthy-row"><strong>Caption check</strong><span>kind, clear, short</span></span>
+              <span class="healthy-row"><strong>Audience</strong><span>Close friends</span></span>
+              <span class="healthy-row"><strong>After posting</strong><span>Close app</span></span>
+            </div>
+          `;
+        }
+
+        if (instagram.intent === "message") {
+          return `
+            <div class="intent-panel">
+              <span class="healthy-row"><strong>Amy</strong><span>Reply</span></span>
+              <span class="healthy-row"><strong>Project group</strong><span>2 new</span></span>
+              <span class="healthy-row"><strong>Mum</strong><span>Send photo</span></span>
+            </div>
+          `;
+        }
+
+        if (instagram.intent === "friends") {
+          return `
+            <div class="intent-panel">
+              <div class="timer-strip"><span>Friends update</span><span>05:00 left</span></div>
+              <span class="healthy-row"><strong>3 close friends</strong><span>Stories only</span></span>
+              <span class="healthy-row"><strong>No Explore</strong><span>Locked</span></span>
+              <span class="healthy-row"><strong>Exit reminder</strong><span>On</span></span>
+            </div>
+          `;
+        }
+
+        return `<div class="intent-panel"><p>Choose a door before the feed chooses one for you.</p></div>`;
+      }
+
+      return `
+        <div class="demo-frame instagram-demo">
+          <div class="phone-shell">
+            ${renderPhoneStatus()}
+            ${!instagram.opened ? `
+              <div class="phone-home">
+                <div class="phone-widget">
+                  <strong>Healthy Mode</strong>
+                  <span>Tap Instagram when you know why. The feed can wait outside.</span>
+                </div>
+                <div class="app-grid" aria-label="Phone home screen">
+                  ${homeApps.slice(0, 8).map(renderMutedApp).join("")}
+                  <button class="app-tile" type="button" data-open-instagram aria-label="Open Instagram in Healthy Mode">
+                    <span class="healthy-app-icon">
+                      ${productMeta.instagram.icon}
+                      <span class="healthy-badge">H</span>
+                    </span>
+                    <span>Instagram</span>
+                  </button>
+                  ${homeApps.slice(8).map(renderMutedApp).join("")}
+                </div>
+                <div class="phone-dock" aria-hidden="true">
+                  ${dockApps.map((app) => `<span class="app-icon-shell" style="--app-bg:${app.bg}"><span>${app.mark}</span></span>`).join("")}
+                </div>
+              </div>
+            ` : `
+              <div class="healthy-screen">
+                <div class="healthy-top">
+                  <div><strong>Healthy Mode</strong><span>Take charge</span></div>
+                  <span class="healthy-pill">Instagram first door</span>
+                </div>
+                <div>
+                  <h3>What do you want to do today?</h3>
+                  <p>Pick an intention first. The feed can wait its turn.</p>
+                </div>
+                <div class="intent-grid">
+                  ${Object.entries(intentLabels).map(([key, copy]) => `
+                    <button class="intent-button" type="button" data-intent="${key}" aria-pressed="${instagram.intent === key}">
+                      <span class="intent-icon">${key === "search" ? "S" : key === "post" ? "P" : key === "message" ? "M" : "5"}</span>
+                      <span>${copy[0]}<br><small>${copy[1]}</small></span>
+                    </button>
+                  `).join("")}
+                </div>
+                ${renderIntentPanel()}
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function rerenderActive() {
+      selectProduct(state.active);
+    }
+
+    function hydrateDemo(product) {
+      if (product === "spotify") {
+        const selectAll = document.querySelector("[data-select-all]");
+        if (selectAll) {
+          selectAll.addEventListener("change", () => {
+            state.spotify.selected = selectAll.checked
+              ? new Set(spotifySongs.map((song) => song.id))
+              : new Set();
+            state.spotify.menu = null;
+            state.spotify.toast = "";
+            rerenderActive();
+          });
+        }
+
+        document.querySelectorAll("[data-song-check]").forEach((input) => {
+          input.addEventListener("change", () => {
+            const id = input.dataset.songCheck;
+            if (input.checked) state.spotify.selected.add(id);
+            else state.spotify.selected.delete(id);
+            state.spotify.menu = null;
+            state.spotify.toast = "";
+            rerenderActive();
+          });
+        });
+
+        document.querySelectorAll("[data-song-row]").forEach((row) => {
+          row.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            const id = row.dataset.songRow;
+            if (!state.spotify.selected.has(id)) {
+              state.spotify.selected = new Set([id]);
+            }
+            state.spotify.menu = {
+              x: Math.min(event.clientX, window.innerWidth - 252),
+              y: Math.min(event.clientY, window.innerHeight - 132)
+            };
+            state.spotify.toast = "";
+            rerenderActive();
+          });
+
+          row.addEventListener("keydown", (event) => {
+            if (event.key === " " || event.key === "Enter") {
+              event.preventDefault();
+              const id = row.dataset.songRow;
+              if (state.spotify.selected.has(id)) state.spotify.selected.delete(id);
+              else state.spotify.selected.add(id);
+              state.spotify.menu = null;
+              state.spotify.toast = "";
+              rerenderActive();
+            }
+          });
+        });
+
+        document.querySelectorAll("[data-spotify-action]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const count = state.spotify.selected.size;
+            if (button.dataset.spotifyAction === "clear-selection") {
+              state.spotify.selected = new Set();
+              state.spotify.toast = "Selection cleared.";
+            } else if (button.dataset.spotifyAction === "focus-queue") {
+              state.spotify.toast = count + " song" + (count === 1 ? "" : "s") + " sent to focus queue.";
+            } else {
+              state.spotify.toast = count + " song" + (count === 1 ? "" : "s") + " staged as a new list.";
+            }
+            state.spotify.menu = null;
+            rerenderActive();
+          });
+        });
+      }
+
+      if (product === "notion") {
+        document.querySelectorAll("[data-cell]").forEach((cell) => {
+          cell.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            state.notion.menu = {
+              cell: cell.dataset.cell,
+              x: Math.min(event.clientX, window.innerWidth - 252),
+              y: Math.min(event.clientY, window.innerHeight - 220)
+            };
+            rerenderActive();
+          });
+        });
+
+        document.querySelectorAll("[data-notion-color]").forEach((button) => {
+          button.addEventListener("click", () => {
+            if (!state.notion.menu) return;
+            const color = button.dataset.notionColor;
+            if (color === "remove") delete state.notion.cellColors[state.notion.menu.cell];
+            else state.notion.cellColors[state.notion.menu.cell] = color;
+            state.notion.menu = null;
+            rerenderActive();
+          });
+        });
+      }
+
+      if (product === "instagram") {
+        const opener = document.querySelector("[data-open-instagram]");
+        if (opener) {
+          opener.addEventListener("click", () => {
+            state.instagram.opened = true;
+            state.instagram.intent = null;
+            rerenderActive();
+          });
+        }
+
+        document.querySelectorAll("[data-intent]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.instagram.intent = button.dataset.intent;
+            rerenderActive();
+          });
+        });
+      }
+    }
+
+    function setCompanyPopover(open) {
+      document.getElementById("companyPopover").dataset.open = String(open);
+      document.getElementById("activeCompany").setAttribute("aria-expanded", String(open));
+    }
+
+    function setupCompanyPicker() {
+      const activeCompany = document.getElementById("activeCompany");
+      const companyPicker = document.querySelector(".company-picker");
+      const companyPopover = document.getElementById("companyPopover");
+      let closeTimer = null;
+
+      function openPicker() {
+        window.clearTimeout(closeTimer);
+        setCompanyPopover(true);
+      }
+
+      function closePickerSoon() {
+        window.clearTimeout(closeTimer);
+        closeTimer = window.setTimeout(() => {
+          setCompanyPopover(false);
+        }, 140);
+      }
+
+      activeCompany.addEventListener("click", (event) => {
+        event.stopPropagation();
+        window.clearTimeout(closeTimer);
+        setCompanyPopover(companyPopover.dataset.open !== "true");
+      });
+
+      let wheelLock = false;
+      function handleWheel(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openPicker();
+        if (wheelLock) return;
+        wheelLock = true;
+        cycleProduct(event.deltaY > 0 ? 1 : -1);
+        setCompanyPopover(true);
+        window.setTimeout(() => {
+          wheelLock = false;
+        }, 280);
+      }
+
+      companyPicker.addEventListener("mouseenter", openPicker);
+      companyPicker.addEventListener("mouseleave", closePickerSoon);
+      activeCompany.addEventListener("focus", openPicker);
+      companyPopover.addEventListener("focusin", openPicker);
+      companyPicker.addEventListener("wheel", handleWheel, { passive: false });
+
+      document.querySelectorAll("[data-product-option]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          setCompanyPopover(false);
+          selectProduct(button.dataset.productOption);
+        });
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      if (state.spotify.menu && !event.target.closest(".spotify-context-menu")) {
+        state.spotify.menu = null;
+        if (state.active === "spotify") rerenderActive();
+      }
+
+      if (state.notion.menu && !event.target.closest(".notion-context-menu")) {
+        state.notion.menu = null;
+        if (state.active === "notion") rerenderActive();
+      }
+
+      if (!event.target.closest(".company-picker")) {
+        setCompanyPopover(false);
       }
     });
 
-    // --- DARK / LIGHT MODE ---
-    function setTheme(theme, btn) {
-      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
-      document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      localStorage.setItem('theme', theme);
-    }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setCompanyPopover(false);
+        state.notion.menu = null;
+        state.spotify.menu = null;
+        if (state.active === "notion" || state.active === "spotify") rerenderActive();
+      }
+    });
 
-    // Load saved theme
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      document.querySelectorAll('.theme-btn').forEach((b, i) => {
-        b.classList.toggle('active', i === 1);
-      });
-    }
+    setupTheme();
+    setupCompanyPicker();
+    selectProduct(productMeta[location.hash.replace("#", "")] ? location.hash.replace("#", "") : "spotify");
   </script>
-
 </body>
 </html>
