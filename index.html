@@ -147,7 +147,7 @@
     .site-shell {
       width: min(100%, 1240px);
       margin: 0 auto;
-      padding: var(--space-6);
+      padding: var(--space-7) var(--space-6) var(--space-6);
       display: grid;
       grid-template-columns: minmax(500px, 500px) minmax(0, 1fr);
       gap: var(--space-5);
@@ -158,7 +158,7 @@
       min-width: 0;
       padding: var(--space-4) var(--space-3) var(--space-3);
       display: grid;
-      gap: var(--space-6);
+      gap: 38px;
       position: sticky;
       top: var(--space-5);
     }
@@ -167,9 +167,9 @@
       margin: 0;
       max-width: 31rem;
       display: grid;
-      gap: var(--space-2);
+      gap: 7px;
       font-size: 27px;
-      line-height: 1.12;
+      line-height: 1.1;
       font-weight: 680;
     }
 
@@ -181,6 +181,7 @@
       color: var(--text-tertiary);
       font-size: 0.82em;
       font-weight: 520;
+      margin-bottom: 3px;
     }
 
     .worked-line {
@@ -230,11 +231,11 @@
     }
 
     .caption {
-      max-width: 31rem;
-      margin: var(--space-5) 0 0;
+      max-width: 28rem;
+      margin: 18px 0 0;
       color: var(--text-secondary);
       font-size: 15px;
-      line-height: 1.6;
+      line-height: 1.45;
     }
 
     .company-popover {
@@ -373,9 +374,10 @@
     .panel-footer {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-2);
+      gap: 7px 11px;
       color: var(--text-tertiary);
-      font-size: 13px;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .panel-footer a {
@@ -397,7 +399,7 @@
 
     .demo-wrap {
       display: grid;
-      gap: var(--space-4);
+      gap: 18px;
       padding: var(--space-5);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-2);
@@ -433,7 +435,7 @@
       margin: var(--space-2) 0 0;
       color: var(--text-secondary);
       font-size: 15px;
-      line-height: 1.55;
+      line-height: 1.45;
     }
 
     .demo-count {
@@ -1027,7 +1029,7 @@
       --ig-blue: #405de6;
       --ig-ink: #251621;
       --ig-muted: #705363;
-      align-items: start;
+      align-items: center;
       justify-items: center;
       padding: var(--space-4);
       border-color: rgba(225, 48, 108, 0.18);
@@ -1043,25 +1045,39 @@
     }
 
     .phone-shell {
-      width: min(100%, 376px);
-      min-height: 600px;
+      width: min(100%, 336px);
+      aspect-ratio: 9 / 19.4;
       overflow: hidden;
-      border: 1px solid rgba(225, 48, 108, 0.2);
-      border-radius: 34px;
+      border: 2px solid #202127;
+      border-radius: 38px;
+      padding: 5px;
       color: var(--ig-ink);
-      background: #fffafd;
-      box-shadow: 0 26px 70px rgba(225, 48, 108, 0.18);
+      background: #111217;
+      box-shadow:
+        0 30px 74px rgba(37, 22, 33, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-theme="dark"] .phone-shell {
+      border-color: #3a2b37;
+      background: #08080b;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.42),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.07);
     }
 
     .phone-status {
       position: relative;
-      min-height: 42px;
+      flex: 0 0 42px;
       padding: 0 24px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       color: #2b2028;
-      background: rgba(255, 255, 255, 0.72);
+      border-radius: 31px 31px 0 0;
+      background: rgba(255, 255, 255, 0.92);
       font-size: 12px;
       font-weight: 760;
     }
@@ -1082,13 +1098,14 @@
       justify-self: end;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .signal-bars {
       display: inline-flex;
       align-items: end;
       gap: 2px;
+      color: #1f8bff;
     }
 
     .signal-bars span {
@@ -1099,45 +1116,37 @@
 
     .signal-bars span:nth-child(1) {
       height: 5px;
-      opacity: 0.55;
     }
 
     .signal-bars span:nth-child(2) {
       height: 7px;
-      opacity: 0.75;
     }
 
     .signal-bars span:nth-child(3) {
       height: 9px;
     }
 
-    .wifi-dot {
-      width: 8px;
-      height: 8px;
-      border: 2px solid currentColor;
-      border-left-color: transparent;
-      border-bottom-color: transparent;
-      border-radius: 50%;
-      transform: rotate(-45deg);
+    .signal-bars span:nth-child(4) {
+      height: 11px;
     }
 
     .battery {
       position: relative;
       width: 20px;
       height: 10px;
-      border: 1.5px solid currentColor;
+      border: 1.5px solid #21c35e;
       border-radius: 3px;
     }
 
     .battery::before {
       content: "";
       position: absolute;
+      left: 2px;
       right: 2px;
       top: 2px;
-      width: 12px;
       height: 4px;
       border-radius: 1px;
-      background: currentColor;
+      background: #21c35e;
     }
 
     .battery::after {
@@ -1148,45 +1157,47 @@
       width: 2px;
       height: 4px;
       border-radius: 0 2px 2px 0;
-      background: currentColor;
+      background: #21c35e;
+    }
+
+    .phone-home,
+    .instagram-loading,
+    .healthy-screen,
+    .result-screen {
+      min-height: 0;
+      flex: 1 1 auto;
+      overflow: auto;
+      border-radius: 0 0 31px 31px;
+      scrollbar-width: none;
+    }
+
+    .phone-home::-webkit-scrollbar,
+    .instagram-loading::-webkit-scrollbar,
+    .healthy-screen::-webkit-scrollbar,
+    .result-screen::-webkit-scrollbar {
+      display: none;
     }
 
     .phone-home {
-      min-height: 558px;
-      padding: var(--space-4);
+      padding: 18px 16px 16px;
       display: grid;
       align-content: space-between;
-      gap: var(--space-4);
+      gap: 18px;
       background:
-        linear-gradient(160deg, rgba(247, 119, 55, 0.16), rgba(225, 48, 108, 0.12) 44%, rgba(64, 93, 230, 0.14)),
+        radial-gradient(circle at 48% 0%, rgba(255, 255, 255, 0.72), transparent 30%),
+        linear-gradient(160deg, rgba(247, 119, 55, 0.18), rgba(225, 48, 108, 0.13) 46%, rgba(64, 93, 230, 0.16)),
         #fffafd;
+      animation: phoneScreenIn 0.22s ease both;
     }
 
-    .phone-widget {
-      min-height: 86px;
-      border: 1px solid rgba(225, 48, 108, 0.13);
-      border-radius: 22px;
-      padding: var(--space-3);
-      display: grid;
-      align-content: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-    }
-
-    .phone-widget strong,
-    .phone-widget span {
-      display: block;
-    }
-
-    .phone-widget strong {
-      font-size: 15px;
-    }
-
-    .phone-widget span {
-      color: var(--ig-muted);
-      font-size: 12px;
+    .home-screen-note {
+      justify-self: center;
+      max-width: 15rem;
+      margin: 0;
+      color: rgba(37, 22, 33, 0.62);
+      font-size: 11px;
       line-height: 1.35;
+      text-align: center;
     }
 
     .app-grid,
@@ -1194,6 +1205,10 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: var(--space-3);
+    }
+
+    .app-grid {
+      align-content: start;
     }
 
     .app-tile {
@@ -1235,6 +1250,11 @@
     .healthy-app-icon svg {
       width: 26px;
       height: 26px;
+    }
+
+    .app-icon-shell span {
+      font-size: 12px;
+      font-weight: 760;
     }
 
     .healthy-app-icon {
@@ -1284,74 +1304,111 @@
       border-radius: 14px;
     }
 
+    .instagram-loading {
+      position: relative;
+      padding: 52px 24px 28px;
+      display: grid;
+      justify-items: center;
+      align-content: space-between;
+      background: #ffffff;
+      animation: instaLoadIn 0.42s ease both;
+    }
+
+    .loading-logo {
+      align-self: center;
+      width: 86px;
+      height: 86px;
+      display: grid;
+      place-items: center;
+      color: var(--ig-pink);
+      animation: instaLogoBreathe 0.82s ease both;
+    }
+
+    .loading-logo svg {
+      width: 78px;
+      height: 78px;
+      filter: drop-shadow(0 10px 24px rgba(225, 48, 108, 0.12));
+    }
+
+    .loading-meta {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      color: #8c94a3;
+      font-size: 13px;
+    }
+
+    .loading-meta strong {
+      color: var(--ig-pink);
+      font-size: 19px;
+      font-weight: 780;
+    }
+
+    @keyframes instaLoadIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes instaLogoBreathe {
+      0% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.96);
+      }
+      55% {
+        opacity: 1;
+        transform: translateY(0) scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .healthy-screen h3,
     .healthy-screen p {
       margin: 0;
     }
 
     .healthy-screen h3 {
-      font-size: 22px;
-      line-height: 1.2;
+      font-size: 21px;
+      line-height: 1.12;
+      text-align: center;
     }
 
     .healthy-screen p {
       color: var(--ig-muted);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .healthy-screen {
-      min-height: 558px;
-      padding: var(--space-4);
+      padding: 18px 16px 16px;
       display: grid;
-      align-content: start;
-      gap: var(--space-4);
+      align-content: center;
+      gap: 18px;
       background: #fffafd;
-    }
-
-    .healthy-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-3);
-    }
-
-    .healthy-top strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .healthy-top span {
-      color: var(--ig-pink);
-      font-size: 12px;
-      font-weight: 720;
-    }
-
-    .healthy-pill {
-      min-height: 28px;
-      border-radius: 999px;
-      padding: 0 var(--space-3);
-      display: inline-flex;
-      align-items: center;
-      color: var(--ig-pink);
-      background: rgba(225, 48, 108, 0.1);
-      font-size: 12px;
-      font-weight: 760;
+      animation: phoneScreenIn 0.24s ease both;
     }
 
     .intent-grid {
       display: grid;
-      gap: var(--space-2);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
     .intent-button {
-      min-height: 54px;
+      min-height: 128px;
       border: 1px solid rgba(225, 48, 108, 0.16);
-      border-radius: var(--radius-1);
-      padding: var(--space-3);
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
+      border-radius: 18px;
+      padding: 14px;
+      display: grid;
+      align-content: space-between;
+      justify-items: start;
+      gap: 10px;
       color: var(--ig-ink);
       background: #ffffff;
       cursor: pointer;
@@ -1374,9 +1431,9 @@
     }
 
     .intent-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
       color: var(--ig-pink);
@@ -1384,30 +1441,96 @@
       flex: 0 0 auto;
     }
 
-    .intent-panel {
+    .intent-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .intent-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .intent-copy strong {
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .intent-copy small {
+      color: rgba(112, 83, 99, 0.72);
+      font-size: 11px;
+      font-weight: 480;
+      line-height: 1.35;
+    }
+
+    .result-screen {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      animation: phoneScreenIn 0.22s ease both;
+    }
+
+    .ig-app-bar {
+      flex: 0 0 auto;
+      min-height: 48px;
+      padding: 0 16px;
+      border-bottom: 1px solid #efedf0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #1f1f24;
+      font-size: 17px;
+      font-weight: 760;
+    }
+
+    .ig-app-bar svg {
+      width: 20px;
+      height: 20px;
+      color: #36323a;
+    }
+
+    .result-content {
+      flex: 0 1 auto;
+      min-height: 0;
+      padding: 14px 14px 12px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+
+    .result-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ig-search-bar,
+    .ig-composer,
+    .ig-card,
+    .ig-dm-row {
       border: 1px solid rgba(225, 48, 108, 0.16);
       border-radius: var(--radius-1);
       padding: var(--space-3);
-      display: grid;
-      gap: var(--space-3);
       background: #ffffff;
     }
 
-    .healthy-input {
-      min-height: 40px;
-      border: 1px solid rgba(225, 48, 108, 0.16);
-      border-radius: var(--radius-1);
-      padding: 0 var(--space-3);
-      color: var(--ig-ink);
-      background: #fff8fb;
+    .ig-search-bar {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #8e8790;
+      background: #f6f3f5;
+      border-color: transparent;
+      font-size: 13px;
     }
 
-    .healthy-list {
-      display: grid;
-      gap: var(--space-2);
+    .ig-search-bar svg {
+      width: 17px;
+      height: 17px;
     }
 
-    .healthy-row {
+    .ig-profile-row {
       min-height: 42px;
       border-radius: var(--radius-1);
       padding: var(--space-2) var(--space-3);
@@ -1418,6 +1541,88 @@
       color: var(--ig-muted);
       background: #fff5fa;
       font-size: 13px;
+    }
+
+    .ig-profile-row {
+      background: #ffffff;
+      color: #29242a;
+      box-shadow: inset 0 0 0 1px #f0edf0;
+    }
+
+    .ig-profile-row strong,
+    .ig-dm-row strong,
+    .ig-card strong {
+      color: #1f1f24;
+    }
+
+    .avatar,
+    .story-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ig-orange), var(--ig-pink), var(--ig-blue));
+      flex: 0 0 auto;
+    }
+
+    .story-rail {
+      display: flex;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .story-chip {
+      width: 58px;
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      color: #5a515a;
+      font-size: 10px;
+    }
+
+    .story-avatar {
+      width: 46px;
+      height: 46px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 2px var(--ig-pink);
+    }
+
+    .ig-composer,
+    .ig-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ig-composer span,
+    .ig-card span {
+      color: #746b74;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .composer-preview {
+      min-height: 144px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(64, 93, 230, 0.16), rgba(247, 119, 55, 0.2)),
+        #fff3f8;
+    }
+
+    .composer-controls,
+    .ig-mini-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: #746b74;
+      font-size: 12px;
+    }
+
+    .ig-dm-row {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #746b74;
+      font-size: 12px;
     }
 
     .timer-strip {
@@ -1432,16 +1637,52 @@
       font-weight: 780;
     }
 
+    .phone-exit {
+      position: sticky;
+      bottom: 64px;
+      align-self: center;
+      min-height: 42px;
+      margin: 24px auto 72px;
+      border: 1px solid rgba(30, 30, 35, 0.08);
+      border-radius: 999px;
+      padding: 0 22px;
+      color: rgba(37, 22, 33, 0.72);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 10px 26px rgba(37, 22, 33, 0.12);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 720;
+    }
+
+    .phone-exit:hover,
+    .phone-exit:focus-visible {
+      color: var(--ig-pink);
+      outline: none;
+    }
+
+    @keyframes phoneScreenIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 1080px) {
       .site-shell {
         grid-template-columns: 1fr;
-        padding: var(--space-5);
+        padding: var(--space-6) var(--space-5) var(--space-5);
       }
 
       .intro-panel {
         position: relative;
         top: 0;
         padding: var(--space-3) 0 0;
+        gap: 34px;
       }
 
       .intro-copy {
@@ -1452,7 +1693,8 @@
 
     @media (max-width: 760px) {
       .site-shell {
-        padding: var(--space-4);
+        padding: 28px var(--space-4) var(--space-5);
+        gap: var(--space-5);
       }
 
       .theme-toggle {
@@ -1461,7 +1703,8 @@
       }
 
       .demo-wrap {
-        padding: var(--space-4);
+        gap: var(--space-3);
+        padding: 20px;
       }
 
       .demo-heading {
@@ -1496,10 +1739,42 @@
       .intro-copy {
         max-width: 100%;
         font-size: 23px;
+        gap: 6px;
+      }
+
+      .caption {
+        max-width: 19rem;
+        margin-top: 16px;
+        line-height: 1.42;
+      }
+
+      .panel-footer {
+        max-width: 19rem;
+        gap: 4px 12px;
       }
 
       .worked-line {
         white-space: normal;
+      }
+
+      .company-popover {
+        position: fixed;
+        top: var(--picker-popover-top, 190px);
+        left: var(--picker-popover-left, 16px);
+        right: auto;
+        width: min(300px, calc(100vw - 32px));
+        height: 188px;
+        padding: var(--space-2);
+      }
+
+      .company-option {
+        min-height: 48px;
+        grid-template-columns: 34px minmax(0, 1fr) 14px;
+        gap: var(--space-2);
+      }
+
+      .company-option[aria-selected="true"] {
+        min-height: 62px;
       }
 
       .demo-title {
@@ -1581,8 +1856,8 @@
         <header class="demo-heading">
           <div>
             <p class="demo-eyebrow" id="demoEyebrow">Not employed there. Still opinionated.</p>
-            <h1 class="demo-title" id="demoTitle">Playlist triage, without breaking flow</h1>
-            <p class="demo-note" id="demoNote">Select a few tracks, right-click once, and turn scattered liked songs into a focused playlist without leaving the table.</p>
+            <h1 class="demo-title" id="demoTitle">Turn liked songs into playlists, in place</h1>
+            <p class="demo-note" id="demoNote">Select multiple tracks in place, then turn them into a new playlist with one right-click, no detour, no mess.</p>
           </div>
         </header>
 
@@ -1598,16 +1873,16 @@
     const productMeta = {
       spotify: {
         name: "Spotify",
-        title: "Playlist triage, without breaking flow",
-        note: "Select a few tracks, right-click once, and turn scattered liked songs into a focused playlist without leaving the table.",
+        title: "Turn liked songs into playlists, in place",
+        note: "Select multiple tracks in place, then turn them into a new playlist with one right-click, no detour, no mess.",
         color: "#1ed760",
         soft: "#e8f8ef",
         icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.14"/><path d="M7 10.2c3.5-1.2 7.1-.8 10.2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8 13.1c2.5-.8 5-.6 7.3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'
       },
       notion: {
         name: "Notion",
-        title: "Cell colors without table drama",
-        note: "Notion can color rows and columns, but one cell often carries the signal. This adds right-click cell color overrides and a quick remove option.",
+        title: "Color the exact signal",
+        note: "Override the color of a single table cell when one detail matters, while keeping row and column styling intact.",
         color: "#111111",
         darkColor: "#ffffff",
         soft: "#f1f1f1",
@@ -1615,8 +1890,8 @@
       },
       instagram: {
         name: "Instagram",
-        title: "Healthy Mode: Take charge",
-        note: "Open Instagram with an intention first: search, post, message, or check friends for five minutes, so the app starts with purpose instead of an infinite feed.",
+        title: 'Healthy "De-scroll" Mode',
+        note: "Choose what you came to do before Instagram opens: search, post, message, or check friends for five minutes, so the feed becomes a path instead of a trap.",
         color: "#e1306c",
         soft: "#fff0f6",
         icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16.4" cy="7.8" r="1" fill="currentColor"/></svg>'
@@ -1649,10 +1924,12 @@
         menu: null
       },
       instagram: {
-        opened: false,
+        screen: "home",
         intent: null
       }
     };
+
+    let instagramLoadingTimer = null;
 
     function getTimeSettings() {
       const hour = new Date().getHours();
@@ -1660,6 +1937,20 @@
       if (hour >= 12 && hour < 18) return { greeting: "Good afternoon", theme: "light" };
       if (hour >= 18 && hour < 22) return { greeting: "Good evening", theme: "dark" };
       return { greeting: "Good night", theme: "dark" };
+    }
+
+    function formatPhoneTime(date = new Date()) {
+      return date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      });
+    }
+
+    function updatePhoneTime() {
+      document.querySelectorAll("[data-phone-time]").forEach((element) => {
+        element.textContent = formatPhoneTime();
+      });
     }
 
     function themeIcon(theme) {
@@ -1693,10 +1984,12 @@
       document.getElementById("themeToggle").addEventListener("click", () => {
         applyTheme(state.theme === "dark" ? "light" : "dark", true);
       });
+      window.setInterval(updatePhoneTime, 30000);
     }
 
     function selectProduct(product) {
       if (!productMeta[product]) product = "spotify";
+      if (product !== "instagram") window.clearTimeout(instagramLoadingTimer);
       state.active = product;
       const meta = productMeta[product];
 
@@ -1708,6 +2001,7 @@
       document.getElementById("demoNote").textContent = meta.note;
       document.getElementById("demoStage").innerHTML = renderDemo(product);
       hydrateDemo(product);
+      updatePhoneTime();
       history.replaceState(null, "", "#" + product);
     }
 
@@ -1769,8 +2063,8 @@
               </div>
               <div>
                 <p class="song-meta">Playlist prototype</p>
-                <h2 class="spotify-title">Playlist triage</h2>
-                <p class="spotify-copy">First-column checkboxes plus one right-click action for turning scattered liked songs into a cleaner new list.</p>
+                <h2 class="spotify-title">Liked songs, ready to group</h2>
+                <p class="spotify-copy">Multi-select tracks and make a new playlist from the table, without interrupting the listening flow.</p>
               </div>
             </header>
 
@@ -1924,14 +2218,22 @@
         friends: ["Check friends for 5 min", "Updates with a visible exit."]
       };
 
+      const intentIcons = {
+        search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15 15 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+        post: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.5v7M8.5 12h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+        message: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 7.5c0-1.1.9-2 2-2h9c1.1 0 2 .9 2 2v6.2c0 1.1-.9 2-2 2h-5.3l-4.1 3v-3H7.5c-1.1 0-2-.9-2-2V7.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+        friends: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4.4l3 1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        heart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19s-6.5-3.8-6.5-8.4A3.6 3.6 0 0 1 12 8.5a3.6 3.6 0 0 1 6.5 2.1C18.5 15.2 12 19 12 19Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+        send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12 19 5.5l-4.8 13-2.7-5.4L4.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>'
+      };
+
       function renderPhoneStatus() {
         return `
           <div class="phone-status" aria-label="Phone status">
-            <span class="ios-time">10:42</span>
+            <span class="ios-time" data-phone-time>${formatPhoneTime()}</span>
             <span class="dynamic-island" aria-hidden="true"></span>
             <span class="ios-indicators" aria-hidden="true">
-              <span class="signal-bars"><span></span><span></span><span></span></span>
-              <span class="wifi-dot"></span>
+              <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
               <span class="battery"></span>
             </span>
           </div>
@@ -1947,100 +2249,146 @@
         `;
       }
 
-      function renderIntentPanel() {
-        if (instagram.intent === "search") {
-          return `
-            <div class="intent-panel">
-              <input class="healthy-input" value="" placeholder="Search a name or handle" aria-label="Search a person">
-              <div class="healthy-list">
-                <span class="healthy-row"><strong>Design friend</strong><span>profile</span></span>
-                <span class="healthy-row"><strong>Manchester studio</strong><span>recent</span></span>
-                <span class="healthy-row"><strong>Saved collaborator</strong><span>message</span></span>
-              </div>
+      function renderHome() {
+        const firstRow = [homeApps[0], "instagram", homeApps[1], homeApps[2]];
+        const remainingApps = homeApps.slice(3);
+        return `
+          <div class="phone-home">
+            <div class="app-grid" aria-label="Phone home screen">
+              ${firstRow.map((app) => {
+                if (app === "instagram") {
+                  return `
+                    <button class="app-tile" type="button" data-open-instagram aria-label="Open Instagram in Healthy Mode">
+                      <span class="healthy-app-icon">
+                        ${productMeta.instagram.icon}
+                        <span class="healthy-badge">H</span>
+                      </span>
+                      <span>Instagram</span>
+                    </button>
+                  `;
+                }
+                return renderMutedApp(app);
+              }).join("")}
+              ${remainingApps.map(renderMutedApp).join("")}
             </div>
-          `;
-        }
-
-        if (instagram.intent === "post") {
-          return `
-            <div class="intent-panel">
-              <span class="healthy-row"><strong>Caption check</strong><span>kind, clear, short</span></span>
-              <span class="healthy-row"><strong>Audience</strong><span>Close friends</span></span>
-              <span class="healthy-row"><strong>After posting</strong><span>Close app</span></span>
+            <p class="home-screen-note">Instagram starts with a small front door. Everything else is just decoration.</p>
+            <div class="phone-dock" aria-hidden="true">
+              ${dockApps.map((app) => `<span class="app-icon-shell" style="--app-bg:${app.bg}"><span>${app.mark}</span></span>`).join("")}
             </div>
-          `;
-        }
-
-        if (instagram.intent === "message") {
-          return `
-            <div class="intent-panel">
-              <span class="healthy-row"><strong>Amy</strong><span>Reply</span></span>
-              <span class="healthy-row"><strong>Project group</strong><span>2 new</span></span>
-              <span class="healthy-row"><strong>Mum</strong><span>Send photo</span></span>
-            </div>
-          `;
-        }
-
-        if (instagram.intent === "friends") {
-          return `
-            <div class="intent-panel">
-              <div class="timer-strip"><span>Friends update</span><span>05:00 left</span></div>
-              <span class="healthy-row"><strong>3 close friends</strong><span>Stories only</span></span>
-              <span class="healthy-row"><strong>No Explore</strong><span>Locked</span></span>
-              <span class="healthy-row"><strong>Exit reminder</strong><span>On</span></span>
-            </div>
-          `;
-        }
-
-        return `<div class="intent-panel"><p>Choose a door before the feed chooses one for you.</p></div>`;
+          </div>
+        `;
       }
+
+      function renderLoading() {
+        return `
+          <div class="instagram-loading" aria-label="Instagram loading screen">
+            <span></span>
+            <span class="loading-logo">${productMeta.instagram.icon}</span>
+            <span class="loading-meta"><span>from</span><strong>Meta</strong></span>
+          </div>
+        `;
+      }
+
+      function renderMenu() {
+        return `
+          <div class="healthy-screen">
+            <div>
+              <h3>What do you want to do?</h3>
+            </div>
+            <div class="intent-grid">
+              ${Object.entries(intentLabels).map(([key, copy]) => `
+                <button class="intent-button" type="button" data-intent="${key}">
+                  <span class="intent-icon">${intentIcons[key]}</span>
+                  <span class="intent-copy"><strong>${copy[0]}</strong><small>${copy[1]}</small></span>
+                </button>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderResult() {
+        const intent = instagram.intent || "search";
+        const title = {
+          search: "Search",
+          post: "New post",
+          message: "Messages",
+          friends: "Friends"
+        }[intent];
+
+        let content = "";
+
+        if (intent === "search") {
+          content = `
+            <div class="ig-search-bar">${intentIcons.search}<span>Search a person, not a rabbit hole</span></div>
+            <div class="ig-profile-row"><span class="avatar"></span><span><strong>maker.archive</strong><br><small>Portfolio notes and soft systems</small></span><span>View</span></div>
+            <div class="ig-profile-row"><span class="avatar"></span><span><strong>design.friend</strong><br><small>Recent collaborator</small></span><span>Open</span></div>
+            <div class="ig-card"><strong>Explore is paused</strong><span>Search results only. The algorithm can wait outside the room.</span></div>
+          `;
+        }
+
+        if (intent === "post") {
+          return `
+            <div class="result-screen">
+              <div class="ig-app-bar"><span>${title}</span>${intentIcons.send}</div>
+              <div class="result-content">
+                <div class="ig-composer">
+                  <div class="composer-preview"></div>
+                  <strong>Share the thing, not the anxiety.</strong>
+                  <span>Caption draft: clear, kind, and under one breath.</span>
+                  <div class="composer-controls"><span>Audience: Close friends</span><span>After post: Exit</span></div>
+                </div>
+              </div>
+              <button class="phone-exit" type="button" data-exit-instagram>Exit to home</button>
+            </div>
+          `;
+        }
+
+        if (intent === "message") {
+          content = `
+            <div class="ig-dm-row"><span class="avatar"></span><span><strong>Amy</strong><br>Sent a tiny launch note</span><span>Now</span></div>
+            <div class="ig-dm-row"><span class="avatar"></span><span><strong>Project group</strong><br>Two decisions, zero feed detours</span><span>2m</span></div>
+            <div class="ig-dm-row"><span class="avatar"></span><span><strong>Mum</strong><br>Send the photo, be a decent child</span><span>8m</span></div>
+          `;
+        }
+
+        if (intent === "friends") {
+          content = `
+            <div class="timer-strip"><span>Friends update</span><span>05:00 left</span></div>
+            <div class="story-rail">
+              <span class="story-chip"><span class="story-avatar"></span>mood</span>
+              <span class="story-chip"><span class="story-avatar"></span>desk</span>
+              <span class="story-chip"><span class="story-avatar"></span>notes</span>
+              <span class="story-chip"><span class="story-avatar"></span>soft</span>
+            </div>
+            <div class="ig-card"><strong>Feed gate</strong><span>Stories from close friends only. Explore and Reels stay locked until the timer ends.</span><div class="ig-mini-actions"><span>3 updates</span><span>No autoplay</span></div></div>
+          `;
+        }
+
+        return `
+          <div class="result-screen">
+            <div class="ig-app-bar"><span>${title}</span>${intentIcons.heart}</div>
+            <div class="result-content">
+              ${content}
+            </div>
+            <button class="phone-exit" type="button" data-exit-instagram>Exit to home</button>
+          </div>
+        `;
+      }
+
+      const screen = instagram.screen === "loading"
+        ? renderLoading()
+        : instagram.screen === "menu"
+          ? renderMenu()
+          : instagram.screen === "result"
+            ? renderResult()
+            : renderHome();
 
       return `
         <div class="demo-frame instagram-demo">
           <div class="phone-shell">
             ${renderPhoneStatus()}
-            ${!instagram.opened ? `
-              <div class="phone-home">
-                <div class="phone-widget">
-                  <strong>Healthy Mode</strong>
-                  <span>Tap Instagram when you know why. The feed can wait outside.</span>
-                </div>
-                <div class="app-grid" aria-label="Phone home screen">
-                  ${homeApps.slice(0, 8).map(renderMutedApp).join("")}
-                  <button class="app-tile" type="button" data-open-instagram aria-label="Open Instagram in Healthy Mode">
-                    <span class="healthy-app-icon">
-                      ${productMeta.instagram.icon}
-                      <span class="healthy-badge">H</span>
-                    </span>
-                    <span>Instagram</span>
-                  </button>
-                  ${homeApps.slice(8).map(renderMutedApp).join("")}
-                </div>
-                <div class="phone-dock" aria-hidden="true">
-                  ${dockApps.map((app) => `<span class="app-icon-shell" style="--app-bg:${app.bg}"><span>${app.mark}</span></span>`).join("")}
-                </div>
-              </div>
-            ` : `
-              <div class="healthy-screen">
-                <div class="healthy-top">
-                  <div><strong>Healthy Mode</strong><span>Take charge</span></div>
-                  <span class="healthy-pill">Instagram first door</span>
-                </div>
-                <div>
-                  <h3>What do you want to do today?</h3>
-                  <p>Pick an intention first. The feed can wait its turn.</p>
-                </div>
-                <div class="intent-grid">
-                  ${Object.entries(intentLabels).map(([key, copy]) => `
-                    <button class="intent-button" type="button" data-intent="${key}" aria-pressed="${instagram.intent === key}">
-                      <span class="intent-icon">${key === "search" ? "S" : key === "post" ? "P" : key === "message" ? "M" : "5"}</span>
-                      <span>${copy[0]}<br><small>${copy[1]}</small></span>
-                    </button>
-                  `).join("")}
-                </div>
-                ${renderIntentPanel()}
-              </div>
-            `}
+            ${screen}
           </div>
         </div>
       `;
@@ -2048,6 +2396,26 @@
 
     function rerenderActive() {
       selectProduct(state.active);
+    }
+
+    function positionCompanyPopover() {
+      const activeCompany = document.getElementById("activeCompany");
+      const companyPopover = document.getElementById("companyPopover");
+      const isMobile = window.matchMedia("(max-width: 520px)").matches;
+
+      if (!isMobile) {
+        companyPopover.style.removeProperty("--picker-popover-left");
+        companyPopover.style.removeProperty("--picker-popover-top");
+        return;
+      }
+
+      const rect = activeCompany.getBoundingClientRect();
+      const width = Math.min(300, window.innerWidth - 32);
+      const left = Math.max(16, Math.min(rect.left + rect.width / 2 - width / 2, window.innerWidth - width - 16));
+      const top = Math.max(12, Math.min(rect.bottom + 10, window.innerHeight - 200));
+
+      companyPopover.style.setProperty("--picker-popover-left", Math.round(left) + "px");
+      companyPopover.style.setProperty("--picker-popover-top", Math.round(top) + "px");
     }
 
     function hydrateDemo(product) {
@@ -2149,15 +2517,32 @@
         const opener = document.querySelector("[data-open-instagram]");
         if (opener) {
           opener.addEventListener("click", () => {
-            state.instagram.opened = true;
+            window.clearTimeout(instagramLoadingTimer);
+            state.instagram.screen = "loading";
             state.instagram.intent = null;
             rerenderActive();
+            instagramLoadingTimer = window.setTimeout(() => {
+              if (state.active !== "instagram" || state.instagram.screen !== "loading") return;
+              state.instagram.screen = "menu";
+              rerenderActive();
+            }, 760);
           });
         }
 
         document.querySelectorAll("[data-intent]").forEach((button) => {
           button.addEventListener("click", () => {
             state.instagram.intent = button.dataset.intent;
+            state.instagram.screen = "result";
+            window.clearTimeout(instagramLoadingTimer);
+            rerenderActive();
+          });
+        });
+
+        document.querySelectorAll("[data-exit-instagram]").forEach((button) => {
+          button.addEventListener("click", () => {
+            window.clearTimeout(instagramLoadingTimer);
+            state.instagram.screen = "home";
+            state.instagram.intent = null;
             rerenderActive();
           });
         });
@@ -2165,8 +2550,10 @@
     }
 
     function setCompanyPopover(open) {
-      document.getElementById("companyPopover").dataset.open = String(open);
+      const companyPopover = document.getElementById("companyPopover");
+      companyPopover.dataset.open = String(open);
       document.getElementById("activeCompany").setAttribute("aria-expanded", String(open));
+      if (open) positionCompanyPopover();
     }
 
     function setupCompanyPicker() {
@@ -2212,6 +2599,12 @@
       activeCompany.addEventListener("focus", openPicker);
       companyPopover.addEventListener("focusin", openPicker);
       companyPicker.addEventListener("wheel", handleWheel, { passive: false });
+      window.addEventListener("resize", () => {
+        if (companyPopover.dataset.open === "true") positionCompanyPopover();
+      });
+      window.addEventListener("scroll", () => {
+        if (companyPopover.dataset.open === "true") positionCompanyPopover();
+      }, { passive: true });
 
       document.querySelectorAll("[data-product-option]").forEach((button) => {
         button.addEventListener("click", (event) => {
