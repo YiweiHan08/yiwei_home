@@ -145,13 +145,23 @@
     }
 
     .site-shell {
-      width: min(100%, 1240px);
+      --shell-default-width: 1240px;
+      --shell-spotify-width: 1440px;
+      width: min(100%, var(--shell-default-width));
       margin: 0 auto;
       padding: var(--space-7) var(--space-6) var(--space-6);
       display: grid;
       grid-template-columns: minmax(500px, 500px) minmax(0, 1fr);
       gap: var(--space-5);
       align-items: start;
+    }
+
+    @media (min-width: 1241px) {
+      [data-active-product="spotify"] .site-shell {
+        width: min(var(--shell-spotify-width), calc(100vw - ((100vw - var(--shell-default-width)) / 2)));
+        margin-left: calc((100vw - var(--shell-default-width)) / 2);
+        margin-right: 0;
+      }
     }
 
     .intro-panel {
@@ -553,7 +563,7 @@
     }
 
     .spotify-demo {
-      grid-template-columns: 176px minmax(0, 1fr);
+      grid-template-columns: minmax(150px, 176px) minmax(0, 1fr);
       color: #f6f8f4;
       background: #0b0f0d;
     }
@@ -609,7 +619,7 @@
     .spotify-hero {
       padding: var(--space-5);
       display: grid;
-      grid-template-columns: 132px minmax(0, 1fr);
+      grid-template-columns: clamp(104px, 15vw, 148px) minmax(0, 1fr);
       gap: var(--space-4);
       align-items: end;
       background:
@@ -697,9 +707,9 @@
 
     .song-head,
     .song-row {
-      min-width: 620px;
+      min-width: 720px;
       display: grid;
-      grid-template-columns: 34px minmax(220px, 1.55fr) minmax(130px, 0.8fr) 104px 54px;
+      grid-template-columns: 34px minmax(240px, 1.6fr) minmax(160px, 0.9fr) 110px 56px;
       gap: var(--space-3);
       align-items: center;
     }
@@ -1993,6 +2003,7 @@
       state.active = product;
       const meta = productMeta[product];
 
+      document.documentElement.dataset.activeProduct = product;
       applyProductBrand(product);
       updateProductOptions(product);
       document.getElementById("activeCompany").innerHTML = meta.icon + "<span>" + meta.name + "</span>";
@@ -2063,7 +2074,7 @@
               </div>
               <div>
                 <p class="song-meta">Playlist prototype</p>
-                <h2 class="spotify-title">Liked songs, ready to group</h2>
+                <h2 class="spotify-title">Liked songs</h2>
                 <p class="spotify-copy">Multi-select tracks and make a new playlist from the table, without interrupting the listening flow.</p>
               </div>
             </header>
