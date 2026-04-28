@@ -424,6 +424,10 @@
       align-items: end;
     }
 
+    .demo-heading > div {
+      min-width: 0;
+    }
+
     .demo-eyebrow {
       margin: 0 0 var(--space-2);
       color: var(--text-tertiary);
@@ -441,11 +445,12 @@
     }
 
     .demo-note {
-      max-width: 34rem;
+      width: 100%;
       margin: var(--space-2) 0 0;
       color: var(--text-secondary);
       font-size: 15px;
-      line-height: 1.45;
+      line-height: 1.5;
+      text-wrap: pretty;
     }
 
     .demo-count {
@@ -1699,6 +1704,10 @@
         max-width: 24rem;
       }
 
+      .demo-heading {
+        align-items: start;
+      }
+
     }
 
     @media (max-width: 760px) {
@@ -1719,6 +1728,13 @@
 
       .demo-heading {
         grid-template-columns: 1fr;
+      }
+
+      .demo-note,
+      [data-active-product="spotify"] .demo-note,
+      [data-active-product="notion"] .demo-note,
+      [data-active-product="instagram"] .demo-note {
+        width: min(100%, 68ch);
       }
 
       .demo-frame {
@@ -1789,6 +1805,14 @@
 
       .demo-title {
         font-size: 21px;
+      }
+
+      .demo-note,
+      [data-active-product="spotify"] .demo-note,
+      [data-active-product="notion"] .demo-note,
+      [data-active-product="instagram"] .demo-note {
+        width: 100%;
+        line-height: 1.5;
       }
 
       .spotify-actions,
